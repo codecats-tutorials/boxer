@@ -29,6 +29,8 @@ angular.module('projApp')
             'surname'   : '',
             //'errors'    : {},
             toggleCheck : function (organization) {
+                if (this.champion === null) this.champion = [];
+                if (typeof(this.champion) === 'string') this.champion = [this.champion];
                 var champion = this.champion;
                 if (champion.indexOf(organization) === -1) {
                     champion.push(organization);

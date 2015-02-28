@@ -11,27 +11,26 @@ angular.module('projApp')
     .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, acl, Players) {
         window['p'] = Players
         $scope.player = Players.newInstance();
-        $scope.createPlayerSubmit = function () {
-            var form = angular.element('form');
-            form.addClass('loading');
-            $scope.player.$save(function (data) {
-                if (data.id) {
-                    //$scope.player = Players.newInstance(data);
-                    $scope.player = Players.newInstance();
-                }
-                form.removeClass('loading')
-            });
-        };
-        $scope.editPlayerSubmit = function ($event, player) {
+        $scope.savePlayerSubmit = function ($event, player) {
             var form = angular.element($event.currentTarget);
             form.addClass('loading');
-            player.$update()
+            if (player.id) {
+                player.$update(function () {form.removeClass('loading')});
+            } else {
+                player.$save(function (data) {
+                    if (data.id) {
+                        //$scope.player = Players.newInstance(data);
+                        player = Players.newInstance();
+                    }
+                    form.removeClass('loading')
+                });
+            }
         };
         $scope.editPlayer = function (player) {
             if (player.template) {
                 player.template = null;
             } else {
-                player.template = {'url': 'views/forms/boxer-edit.html'};
+                player.template = {'url': 'views/forms/boxer.html'};
             }
         };
         acl.afterInit = function () {
@@ -39,7 +38,7 @@ angular.module('projApp')
                 $http.get('organizations/').then(function (data) {
                     $scope.availableOrganizations = data.data;
                 });
-                $scope.template = {'url': 'views/forms/boxer-add.html'};
+                $scope.template = {'url': 'views/forms/boxer.html'};
             }
         };
 

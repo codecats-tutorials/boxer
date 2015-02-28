@@ -1,6 +1,6 @@
 <form ng-show="'BOXERS'|acl" ng-submit="savePlayerSubmit($event, player)">
     <div class="form-group">
-        <input type="hidden">{$ player.id $}
+        <input value="{$ player.id $}" name="id" type="hidden" />
         <label for="name">Name</label>
         <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
         <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
@@ -15,10 +15,12 @@
     </div>
     <div class="checkbox" ng-repeat="org in availableOrganizations">
         <label>
-            <input ng-checked="player.champion.indexOf(org.name) !== -1" ng-click="player.toggleCheck(org.name)"
-                    type="checkbox" name="player.champion[]" ng-show="org.available">
-            <input ng-checked="player.champion.indexOf(org.name) !== -1" ng-click="player.toggleCheck(org.name)"
-                    type="checkbox" name="player.champion[]" ng-hide="org.available" disabled>
+            <input ng-checked="player.champion && player.champion.indexOf(org.name) !== -1"
+                   ng-click="player.toggleCheck(org.name)"
+                   type="checkbox" name="player.champion[]" ng-show="org.available">
+            <input ng-checked="player.champion && player.champion.indexOf(org.name) !== -1"
+                   ng-click="player.toggleCheck(org.name)"
+                   type="checkbox" name="player.champion[]" ng-hide="org.available" disabled>
             {$ org.name $}
         </label>
     </div>
