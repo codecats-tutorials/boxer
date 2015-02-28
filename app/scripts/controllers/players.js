@@ -9,24 +9,54 @@
  */
 angular.module('projApp')
     .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, acl, Players) {
-        window['p'] = Players
         $scope.player = Players.newInstance();
+        $scope.confirmTemplate = [];
+        $scope.updateUsers = function () {
+            $scope.players = Players.query();
+            $scope.players.$promise.then(function (data) {
+                $scope.chunkedPlayers = chunker.getChunks(data, 3);
+                angular.element('body').removeClass('loading');
+            });
+        };
         $scope.savePlayerSubmit = function ($event, player) {
-            var form = angular.element($event.currentTarget);
-            form.addClass('loading');
+            var element = angular.element($event.currentTarget).find('button[type=submit]');
+
+            element.addClass('loading');
             if (player.id) {
-                player.$update(function () {form.removeClass('loading')});
+                player.$update(function (data) {
+                    if (angular.equals({}, data.errors)){
+                        player.template = null;
+                    }
+                    element.removeClass('loading')
+                });
             } else {
                 player.$save(function (data) {
                     if (data.id) {
                         //$scope.player = Players.newInstance(data);
-                        player = Players.newInstance();
+                        $scope.player = Players.newInstance({});
                     }
-                    form.removeClass('loading')
+                    $scope.updateUsers();
+                    element.removeClass('loading')
                 });
             }
         };
-        $scope.editPlayer = function (player) {
+        $scope.deletePlayer = function ($event, player) {
+            if ($scope.confirmTemplate[player.id]) {
+                $scope.confirmTemplate[player.id] = null;
+            } else {
+                $scope.confirmTemplate[player.id] = 'views/confirm/delete.html';
+            }
+        };
+        $scope.deletePlayerSubmit = function ($event, player) {
+            $scope.confirmTemplate[player.id] = null;
+            var element = angular.element($event.currentTarget);
+            element.addClass('loading');
+            player.$delete(function () {
+                $scope.updateUsers();
+                element.removeClass('loading');
+            });
+        };
+        $scope.editPlayer = function ($event, player) {
             if (player.template) {
                 player.template = null;
             } else {
@@ -44,11 +74,7 @@ angular.module('projApp')
 
         angular.element('body').addClass('loading');
 
-        $scope.players = Players.query();
-        $scope.players.$promise.then(function (data) {
-            $scope.chunkedPlayers = chunker.getChunks(data, 3);
-            angular.element('body').removeClass('loading');
-        });
+        $scope.updateUsers();
         //$http.get('/players').then(function (response) {
         //    $scope.chunkedPlayers = chunker.getChunks(response.data, 3);
         //    angular.element('body').removeClass('loading');

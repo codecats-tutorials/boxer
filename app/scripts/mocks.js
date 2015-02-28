@@ -103,9 +103,13 @@ angular.module('projApp')
       if (player.name.length > 10) {
         player.errors['name'] = ['too long!'];
       }
-      if (angular.equals({}, player.errors) && player.id === null) player.id = 666;
+
+      if (angular.equals({}, player.errors) && player.id === undefined) player.id = 666;
       return [200, player, {}]
     };
     $httpBackend.whenPOST( RegExp(regEsc('players'))).respond(playerFunc);
     $httpBackend.whenPUT( RegExp(regEsc('players'))).respond(playerFunc);
+    $httpBackend.whenDELETE( RegExp(regEsc('players'))).respond(function () {
+      return [200, {}, {}];
+    });
   });
