@@ -1,0 +1,27 @@
+<div ng-repeat="p in player">{$ p $}</div>
+<div ng-repeat="p in player.champion">{$ p.name $}</div>
+<form ng-show="'BOXERS'|acl" ng-submit="createPlayer()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
+        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {$ error $}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="surname">Surname</label>
+        <input ng-model="player.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
+    </div>
+    <div class="checkbox {$ org.available $}" ng-repeat="org in availableOrganizations">
+        <label>
+            <input ng-checked="player.champion.indexOf(org) != -1" ng-click="player.toggleCheck(org)"
+                    type="checkbox" name="player.champion[]" ng-show="org.available">
+            <input ng-checked="player.champion.indexOf(org) != -1" ng-click="player.toggleCheck(org)"
+                    type="checkbox" name="player.champion[]" ng-hide="org.available" disabled>
+            {$ org.name $}
+        </label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
