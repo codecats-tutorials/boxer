@@ -18,6 +18,9 @@
 
                 </p>
             </div>
+            <button ng-show="'BOXERS'|acl" ng-click="editPlayer(player)" class="btn btn-success">Edit</button>
+            <button ng-show="'BOXERS'|acl" class="btn btn-danger">Delete</button>
+            <div class="slide-animate" ng-include="player.template.url"></div>
         </div>
 
     </div>

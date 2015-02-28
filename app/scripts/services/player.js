@@ -11,8 +11,9 @@ angular.module('projApp')
   .factory('Players', function ($resource) {
         var Players = $resource('/players/:id', {id: '@id'}, {
             'save'  : {method: 'POST'},
-            'query' : {method: 'GET'},
-            'update': {method: 'PUT'}
+            'query' : {method: 'GET', isArray: true},
+            'update': {method: 'PUT'},
+            'delete': {method: 'DELETE'}
         });
         Players.newInstance = function (data) {
             if (typeof data === 'undefined') data = {};
@@ -25,7 +26,7 @@ angular.module('projApp')
             'id'        : null,
             'champion'  : [],
             'name'      : '',
-            'surname'   : 'EX',
+            'surname'   : '',
             //'errors'    : {},
             toggleCheck : function (organization) {
                 var champion = this.champion;
