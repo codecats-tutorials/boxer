@@ -1,1 +1,30 @@
-<p>This is the PlayerView view. {$ id $}</p>
+<div class="col-md-12">
+    <div class="well profile">
+        <h2>{$ player.name $} {$ player.surname $}</h2>
+        <div class="col-sm-12">
+            <div class="col-xs-12 col-sm-8">
+                <br>
+                <p><strong>Wzrost: </strong> {$ player.height $}</p>
+                <p><strong>Waga: </strong> {$ player.reach $}</p>
+
+                <p><strong>Opis: </strong> {$ player.description $}</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 text-center">
+                <figure>
+                    <img src="{$ player.avatar $}" alt="" class="img-circle img-responsive">
+                    <figcaption class="ratings">
+                        <p><strong>Kategoria: </strong> {$ player.division $}</p>
+                        <p><strong>Urodzony: </strong> {$ player.birthdate $}</p>
+                        <p><strong>Pozycja: </strong> {$ player.stance $}</p>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="col-xs-12 divider text-center">
+            <div ng-repeat="r in player.ratings" class="col-xs-12 col-sm-4 emphasis">
+                <h2><strong> {$ r.value $} </strong></h2>
+                <p><small>{$ r.organization $}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
