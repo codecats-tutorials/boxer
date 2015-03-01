@@ -60,6 +60,11 @@ angular
         controller: 'PlayersCtrl',
         activeTab: 'players'
       })
+      .when('/player-view/:id', {
+        templateUrl: 'views/player-view.html',
+        controller: 'PlayerViewCtrl',
+        activeTab: 'widok użytkownika'
+      })
       .otherwise({
         redirectTo: '/'
       });
