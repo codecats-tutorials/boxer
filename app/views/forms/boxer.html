@@ -18,7 +18,6 @@
           {$ error $}
         </div>
     </div>
-    {$ player.id $}
     <div class="checkbox" ng-repeat="org in availableOrganizations">
         <label>
             <input ng-checked="player.champion && player.champion.indexOf(org.name) !== -1"
