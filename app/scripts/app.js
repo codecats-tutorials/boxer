@@ -16,7 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngMockE2E'//if u dont want mock requests anymore delete this module
+    //'ngMockE2E'//if u dont want mock requests anymore delete this module
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -78,7 +78,7 @@ angular
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
   })
-  .run(function run ($http, $cookies, $rootScope, $httpBackend, Config) {
+  .run(function run ($http, $cookies, $rootScope) {
     //for django
     $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
 
