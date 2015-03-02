@@ -10,6 +10,7 @@
 angular.module('projApp')
     .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, acl, Players) {
         $scope.player = Players.newInstance();
+        window['sc']=$scope;
         $scope.confirmTemplate = [];
         $scope.updateUsers = function () {
             $scope.players = Players.query();

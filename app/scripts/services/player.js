@@ -31,7 +31,11 @@ angular.module('projApp')
             toggleCheck : function (organization) {
                 if (this.champion === null) this.champion = [];
                 if (typeof(this.champion) === 'string') this.champion = [this.champion];
-                var champion = this.champion;
+                var champion = [];
+                //deep copy
+                for (var i in this.champion) {
+                    champion.push(this.champion[i]);
+                }
                 if (champion.indexOf(organization) === -1) {
                     champion.push(organization);
                 } else {
