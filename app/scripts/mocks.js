@@ -116,7 +116,7 @@ angular.module('projApp')
       var id = arguments[1].match('[0-9]')[0];
       return [200, {
         id: id, name: 'Joseph', surname: 'Parker', birthdate: '1992-01-09', division: 'Hevyweight',
-        stance: 'Orthodox', height: '193cm', reach: '193cm', country: 'New Zealand',
+        stance: 'Praworęczny', height: '193cm', reach: '193cm', country: 'New Zealand',
         avatar: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRlTTDhOZ9bSoHA_3YccvSUJBYUC78mG-r5BXgskMCoO0vX2GGY',
         champion: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet varius lectus, sed consequat risus.',
         ratings: [{organization: 'WBA', value: 14}, {organization: 'WBC', value: 20}, {organization: 'IBF', value: 16}]

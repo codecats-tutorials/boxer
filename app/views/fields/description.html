@@ -1,0 +1,11 @@
+<div class="form-group">
+    <label for="description">Opis</label>
+    <textarea ng-model="player.description" type="text" class="form-control" id="description" placeholder="Imię">
+
+    </textarea>
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.description">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>

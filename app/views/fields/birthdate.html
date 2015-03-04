@@ -1,0 +1,9 @@
+<div class="form-group">
+    <label for="birthdate">Urodzony</label>
+    <input ng-model="player.birthdate" type="text" class="form-control" id="birthdate" placeholder="Urodzony">
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.birthdate">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>

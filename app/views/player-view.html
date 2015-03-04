@@ -1,25 +1,86 @@
 <div class="col-md-12">
     <div class="well profile">
+        <!-- {full edit button -->
+        <div ng-show="acl.resources.BOXERS" class="btn-group dropdown pull-right">
+            <button ng-click="editTemplate($event, player, 'fullName')"
+                    class="btn btn-info btn-lg">
+                <i class="glyphicon glyphicon-refresh"></i> Zapisz
+            </button>
+            <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a>Pełna Edycja</a></li>
+                <li class="divider"></li>
+                <li><a>Usuń Profil</a></li>
+            </ul>
+        </div>
+        <!-- full edit button} -->
+
         <h2>{$ player.name $} {$ player.surname $}</h2>
-        <button ng-show="acl.resources.BOXERS" ng-click="editPlayer($event, player)"
-                class="btn btn-success glyphicon glyphicon-edit">
+        <div class="slide-animate" ng-include="template.fullName.url"></div>
+        <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'fullName')"
+                class="btn btn-success btn-sm glyphicon glyphicon-edit">
             Edit
         </button>
+
         <div class="col-sm-12">
             <div class="col-xs-12 col-sm-8">
                 <br>
-                <p><strong>Wzrost: </strong> {$ player.height $}</p>
-                <p><strong>Waga: </strong> {$ player.reach $}</p>
-
-                <p><strong>Opis: </strong> {$ player.description $}</p>
+                <p>
+                    <strong>Wzrost: </strong> {$ player.height $}
+                    <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'height')"
+                            class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                        Edit
+                    </button>
+                    <div class="slide-animate" ng-include="template.height.url"></div>
+                </p>
+                <p>
+                    <strong>Zasięg: </strong> {$ player.reach $}
+                    <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'reach')"
+                            class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                        Edit
+                    </button>
+                    <div class="slide-animate" ng-include="template.reach.url"></div>
+                </p>
+                <p>
+                    <strong>Opis: </strong> {$ player.description $}
+                    <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'description')"
+                            class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                        Edit
+                    </button>
+                    <div class="slide-animate" ng-include="template.description.url"></div>
+                </p>
             </div>
             <div class="col-xs-12 col-sm-4 text-center">
                 <figure>
                     <img src="{$ player.avatar $}" alt="" class="img-circle img-responsive">
                     <figcaption class="ratings">
-                        <p><strong>Kategoria: </strong> {$ player.division $}</p>
-                        <p><strong>Urodzony: </strong> {$ player.birthdate $}</p>
-                        <p><strong>Pozycja: </strong> {$ player.stance $}</p>
+                        <p>
+                            <strong>Kategoria: </strong> {$ player.division $}
+                            <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'division')"
+                                    class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                                Edit
+                            </button>
+                            <div class="slide-animate" ng-include="template.division.url"></div>
+                        </p>
+                        <p>
+                            <strong>Urodzony: </strong> {$ player.birthdate $}
+                            <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'birthdate')"
+                                    class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                                Edit
+                            </button>
+                            <div class="slide-animate" ng-include="template.birthdate.url"></div>
+                        </p>
+                        <p>
+                            <strong>Pozycja: </strong> {$ player.stance $}
+                            <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'stance')"
+                                    class="btn btn-success btn-xs glyphicon glyphicon-edit">
+                                Edit
+                            </button>
+                            <div class="slide-animate" ng-include="template.stance.url"></div>
+                        </p>
                     </figcaption>
                 </figure>
             </div>

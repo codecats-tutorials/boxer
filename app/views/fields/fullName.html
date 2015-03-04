@@ -1,1 +1,19 @@
-AF
+<div class="form-group">
+    <label for="name">Name</label>
+    <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="surname">Surname</label>
+    <input ng-model="player.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.surname">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="form-group">
+    <label class="label label-default">Pozycja</label>
+    <br />
+    <input type="radio" ng-model="player.stance" value="Praworęczny" ng-checked="player.stance=='Praworęczny'">Praworęczny
+    <br />
+    <input type="radio" ng-model="player.stance" value="Leworęczny" ng-checked="player.stance=='Leworęczny'">Leworęczny
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.stance">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>
