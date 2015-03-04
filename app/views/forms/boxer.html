@@ -1,4 +1,4 @@
-<form ng-show="'BOXERS'|acl" ng-submit="savePlayerSubmit($event, player)">
+<form ng-show="acl.resources.BOXERS" ng-submit="savePlayerSubmit($event, player)">
     <div class="form-group">
         <input value="{$ player.id $}" name="id" type="hidden" />
         <label for="name">Name</label>
@@ -18,6 +18,16 @@
           {$ error $}
         </div>
     </div>
+    <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input ng-model="player.avatar" type="text" class="form-control" id="avatar" placeholder="Avatar">
+        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.avatar">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span>
+          {$ error $}
+        </div>
+    </div>
+
     <div class="checkbox" ng-repeat="org in availableOrganizations">
         <label>
             <input ng-checked="player.champion && player.champion.indexOf(org.name) !== -1"

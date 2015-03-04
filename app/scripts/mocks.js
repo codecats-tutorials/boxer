@@ -90,7 +90,7 @@ angular.module('projApp')
       ], {/*headers*/}];
     });
     $httpBackend.whenGET( RegExp(regEsc('acl'))).respond(function () {
-      return [200, [{'resources': ['BOXERS']}], {}]
+      return [200, ['BOXERS'], {}]
     });
     $httpBackend.whenGET( RegExp(regEsc('organizations'))).respond(function () {
       return [200, [{'name': 'WBA', 'available': true}, {'name': 'WBC', 'available': false}, {'name': 'IBF', 'available': true}], {}]

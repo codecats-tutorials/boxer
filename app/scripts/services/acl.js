@@ -11,6 +11,7 @@ angular.module('projApp')
     .service('acl', function ($http) {
         var me = this;
         this.resourceBin = [];
+        this.resources = {};
         this.actionBin = [];
         this.user = null;
         this.afterInit = function () {};
@@ -31,7 +32,10 @@ angular.module('projApp')
 
         };
         $http.get('/acl').then(function (data) {
-            me.resourceBin = ['BOXERS'];
+            me.resourceBin = data.data;
+            for (var i in me.resourceBin) {
+                me.resources[me.resourceBin[i]] = true;
+            }
             me.afterInit();
         });
 

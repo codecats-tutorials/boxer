@@ -16,7 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    //'ngMockE2E'//if u dont want mock requests anymore delete this module
+    'ngMockE2E'//if u dont want mock requests anymore delete this module
   ])
   .config(function ($routeProvider) {
     $routeProvider

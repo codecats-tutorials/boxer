@@ -9,8 +9,8 @@
  */
 angular.module('projApp')
     .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, acl, Players) {
-        $scope.player = Players.newInstance();
-        window['sc']=$scope;
+        $scope.acl      = acl;
+        $scope.player   = Players.newInstance();
         $scope.confirmTemplate = [];
         $scope.updateUsers = function () {
             $scope.players = Players.query();
@@ -20,15 +20,17 @@ angular.module('projApp')
             });
         };
         $scope.savePlayerSubmit = function ($event, player) {
-            var element = angular.element($event.currentTarget).find('button[type=submit]');
+            var targetObj   = angular.element($event.currentTarget),
+                element     = targetObj.find('button[type=submit]');
 
             element.addClass('loading');
             if (player.id) {
                 player.$update(function (data) {
                     if (angular.equals({}, data.errors)){
                         player.template = null;
+                        targetObj.closest('div.thumbnail').find('.glyphicon-edit').removeClass('active');
                     }
-                    element.removeClass('loading')
+                    element.removeClass('loading');
                 });
             } else {
                 player.$save(function (data) {
@@ -60,8 +62,10 @@ angular.module('projApp')
         $scope.editPlayer = function ($event, player) {
             if (player.template) {
                 player.template = null;
+                angular.element($event.currentTarget).removeClass('active');
             } else {
                 player.template = {'url': 'views/forms/boxer.html'};
+                angular.element($event.currentTarget).addClass('active');
             }
         };
         acl.afterInit = function () {

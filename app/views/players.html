@@ -1,7 +1,8 @@
 <p>This is the players view.</p>
 
 <div class="row">
-    <button class="btn btn-link glyphicon glyphicon-plus-sign center-block" type="button" data-toggle="collapse"
+    <button ng-show="acl.resources.BOXERS" class="btn btn-link glyphicon glyphicon-plus-sign center-block"
+            type="button" data-toggle="collapse"
             data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Dodaj
     </button>
@@ -32,11 +33,11 @@
                     <label ng-hide="player.champion|isArray">{$ player.champion $}</label>
                 </p>
             </div>
-            <button ng-show="'BOXERS'|acl" ng-click="editPlayer($event, player)"
+            <button ng-show="acl.resources.BOXERS" ng-click="editPlayer($event, player)"
                     class="btn btn-success glyphicon glyphicon-edit">
                 Edit
             </button>
-            <button ng-show="'BOXERS'|acl" ng-click="deletePlayer($event, player)"
+            <button ng-show="acl.resources.BOXERS" ng-click="deletePlayer($event, player)"
                     class="btn btn-danger glyphicon glyphicon-remove">
                 Delete
             </button>

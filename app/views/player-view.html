@@ -1,6 +1,10 @@
 <div class="col-md-12">
     <div class="well profile">
         <h2>{$ player.name $} {$ player.surname $}</h2>
+        <button ng-show="acl.resources.BOXERS" ng-click="editPlayer($event, player)"
+                class="btn btn-success glyphicon glyphicon-edit">
+            Edit
+        </button>
         <div class="col-sm-12">
             <div class="col-xs-12 col-sm-8">
                 <br>
