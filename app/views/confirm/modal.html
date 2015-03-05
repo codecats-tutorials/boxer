@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-7">
+        <p ng-show="description"></p>
+        <p ng-hide="description">Wymagane potwierdzenie</p>
+    </div>
+    <div class="col-md-5">
+        <button class="btn btn-danger" ng-click="action();">Potwierdzam</button>
+        <button class="btn btn-default" ng-click="$hide()">Anuluj</button>
+    </div>
+</div>
