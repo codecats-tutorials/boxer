@@ -23,6 +23,7 @@ angular.module('projApp')
             }
         };
 
+
         //acl.afterInit = function () {
         //    if (acl.hasAccessResource('BOXERS')) {
         //
