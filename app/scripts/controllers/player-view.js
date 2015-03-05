@@ -34,17 +34,19 @@ angular.module('projApp')
                 scope: $scope, contentTemplate: 'views/confirm/modal.html'
             });
         };
-        $scope.$on('user.delete.show',function(e, $modal){
+        $scope.$on('user.delete.show', function(e, $modal){
             $modal.$scope.action = function () {
                 $modal.$scope.$hide();
                 $scope.player.$delete();
             }
         });
+        $scope.hideControls = function () {
+            $scope.acl.resources.BOXERS = ! $scope.acl.resources.BOXERS;
+        };
 
-        //acl.afterInit = function () {
-        //    if (acl.hasAccessResource('BOXERS')) {
-        //
-        //        $scope.template = {'url': 'views/forms/boxer.html'};
-        //    }
-        //};
+        acl.afterInit = function () {
+            if ( ! acl.hasAccessResource('BOXERS')) {
+                angular.element('#hide-controls').remove();
+            }
+        };
     });
