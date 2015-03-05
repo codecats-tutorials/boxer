@@ -115,7 +115,7 @@ angular.module('projApp')
     $httpBackend.whenGET( RegExp(regEsc('players/'))).respond(function () {
       var id = arguments[1].match('[0-9]')[0];
       return [200, {
-        id: id, name: 'Joseph', surname: 'Parker', birthdate: '1992-01-09', division: 'Hevyweight',
+        id: id, name: 'Joseph', surname: 'Parker', birthdate: '1992-01-09', division: { label: 'Ciężka', value: 1 },
         stance: 'Praworęczny', height: '193cm', reach: '193cm', country: 'New Zealand',
         avatar: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRlTTDhOZ9bSoHA_3YccvSUJBYUC78mG-r5BXgskMCoO0vX2GGY',
         champion: null, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet varius lectus, sed consequat risus.',

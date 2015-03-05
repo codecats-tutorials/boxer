@@ -58,7 +58,7 @@
                     <img src="{$ player.avatar $}" alt="" class="img-circle img-responsive">
                     <figcaption class="ratings">
                         <p>
-                            <strong>Kategoria: </strong> {$ player.division $}
+                            <strong>Kategoria: </strong> {$ player.division.label $}
                             <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'division')"
                                     class="btn btn-success btn-xs glyphicon glyphicon-edit">
                                 Edit

@@ -12,8 +12,13 @@ angular.module('projApp')
         $scope.acl      = acl;
         $scope.template = {};
         $scope.player   = Players.newInstance();
+        $scope.divisions = [
+            { label: 'Ciężka', value: 1 },
+            { label: 'Pół ciężka', value: 2 }
+        ];
         $scope.player.$get({id: $routeParams.id}, function () {
             $scope.$root.activeTab += ' ' + $scope.player.name + ' ' + $scope.player.surname;
+            $scope.player.division = $scope.divisions[$scope.player.division.value - 1];
         });
         $scope.editTemplate = function ($event, player, tplName) {
             if ($scope.template[tplName]) {
@@ -23,7 +28,7 @@ angular.module('projApp')
             }
         };
         $scope.deleteProfile = function ($event, player) {
-            $scope.description = ''
+            $scope.description = 'Usunąć profil zawodnika: ' + player.name + ' ' + player.surname;
             $modal({
                 show: true, prefixEvent: "user.delete",
                 scope: $scope, contentTemplate: 'views/confirm/modal.html'

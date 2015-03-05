@@ -1,6 +1,7 @@
 <div class="form-group">
     <label for="division">Kategoria</label>
-    <input ng-model="player.division" type="text" class="form-control" id="division" placeholder="Kategoria">
+    <select ng-model="player.division" id="division" ng-options="di as di.label for di in divisions">
+    </select>
     <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.division">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
