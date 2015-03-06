@@ -6,27 +6,70 @@
                 <h4 class="modal-title">{$ player.name $} {$ player.surname $}</h4>
             </div>
             <div class="modal-body">
-                <!-- {full-name -->
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
-                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
-                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                          <span class="sr-only">Error:</span>
-                          {$ error $}
-                        </div>
-                    </div>
+                <div class="row">
+                    <div class="col-md-7">
 
-                    <div class="form-group">
-                        <label for="surname">Surname</label>
-                        <input ng-model="player.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
-                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.surname">
-                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                          <span class="sr-only">Error:</span>
-                          {$ error $}
-                        </div>
+                        <!-- {full-name -->
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
+                                <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                                  {$ error $}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="surname">Surname</label>
+                                <input ng-model="player.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
+                                <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.surname">
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                                  {$ error $}
+                                </div>
+                            </div>
+                        <!-- full-name} -->
+                        <!-- {reach -->
+                            <div class="form-group">
+                                <label for="reach">Zasięg</label>
+                                <input ng-model="player.reach" type="text" class="form-control" id="reach" placeholder="Zasięg">
+                                <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.reach">
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                                  {$ error $}
+                                </div>
+                            </div>
+                        <!-- reach} -->
+                        <!-- {height -->
+                                <div class="form-group">
+                                    <label for="height">Wzrost</label>
+                                    <input ng-model="player.height" type="text" class="form-control" id="height" placeholder="Wzrost">
+                                    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.height">
+                                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                      <span class="sr-only">Error:</span>
+                                      {$ error $}
+                                    </div>
+                                </div>
+                        <!-- height} -->
+
                     </div>
-                <!-- full-name} -->
+                    <div class="col-md-5">
+                        <!-- {avatar -->
+                            <div class="form-group">
+                                <img src="{$ player.avatar $}" alt="" class="img-circle img-responsive">
+                                <label for="avatar">Avatar</label>
+                                <input ng-model="player.avatar" type="text" class="form-control" id="avatar" placeholder="Avatar">
+                                <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.avatar">
+                                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                  <span class="sr-only">Error:</span>
+                                  {$ error $}
+                                </div>
+                            </div>
+                        <!-- avatar} -->
+
+                    </div>
+                </div>
                 <!-- {description -->
                     <div class="form-group">
                         <label for="description">Opis</label>
@@ -43,7 +86,11 @@
                 <!-- {birthdate -->
                     <div class="form-group">
                         <label for="birthdate">Urodzony</label>
-                        <input ng-model="player.birthdate" type="text" class="form-control" id="birthdate" placeholder="Urodzony">
+                        <input id="birthdate" type="text" class="form-control"
+                               ng-model="player.birthdate" placeholder="data"
+                               bs-datepicker data-date-format="yyyy-MM-dd"
+                               data-min-date="02/10/86"
+                               data-max-date="today" data-autoclose="1">
                         <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.birthdate">
                           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                           <span class="sr-only">Error:</span>
@@ -54,8 +101,10 @@
                 <!-- {divisiton -->
                     <div class="form-group">
                         <label for="division">Kategoria</label>
-                        <select ng-model="player.division" id="division" ng-options="di as di.label for di in divisions">
-                        </select>
+                        <button id="division" type="button" class="btn btn-default" ng-model="player.division" data-html="1"
+                                ng-options="di as di.label for di in divisions" bs-select>
+                          Action <span class="caret"></span>
+                        </button>
                         <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.division">
                           <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                           <span class="sr-only">Error:</span>
@@ -63,6 +112,21 @@
                         </div>
                     </div>
                 <!-- division} -->
+                <!-- {stance -->
+                    <div class="form-group">
+                        <label class="label label-default">Pozycja</label>
+                        <br />
+                        <input type="radio" ng-model="player.stance" value="Praworęczny" ng-checked="player.stance=='Praworęczny'">Praworęczny
+                        <br />
+                        <input type="radio" ng-model="player.stance" value="Leworęczny" ng-checked="player.stance=='Leworęczny'">Leworęczny
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.stance">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+                <!-- stance} -->
+
 
             </div>
             <div class="modal-footer">

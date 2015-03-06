@@ -1,4 +1,5 @@
 <div class="col-md-12">
+    <label>Single select:&nbsp;</label>
     <div class="well profile">
         <!-- {full edit button -->
         <button id="hide-controls" ng-click="hideControls($event)" class="pull-right glyphicon glyphicon-eye-open"></button>
@@ -75,7 +76,7 @@
                             <div class="slide-animate" ng-include="template.division.url"></div>
                         </p>
                         <p>
-                            <strong>Urodzony: </strong> {$ player.birthdate $}
+                            <strong>Urodzony: </strong> {$ player.birthdate|date:'yyyy-MM-dd' $}
                             <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'birthdate')"
                                     class="btn btn-success btn-xs glyphicon glyphicon-edit">
                                 Edit

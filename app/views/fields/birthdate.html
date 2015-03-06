@@ -1,6 +1,10 @@
 <div class="form-group">
     <label for="birthdate">Urodzony</label>
-    <input ng-model="player.birthdate" type="text" class="form-control" id="birthdate" placeholder="Urodzony">
+    <input id="birthdate" type="text" class="form-control"
+                               ng-model="player.birthdate" placeholder="data"
+                               bs-datepicker data-date-format="yyyy-MM-dd"
+                               data-min-date="1800-01-01"
+                               data-max-date="today" data-autoclose="1">
     <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.birthdate">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
