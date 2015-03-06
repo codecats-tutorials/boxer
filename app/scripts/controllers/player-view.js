@@ -16,10 +16,12 @@ angular.module('projApp')
             { label: 'Ciężka', value: 1 },
             { label: 'Pół ciężka', value: 2 }
         ];
-        $scope.player.$get({id: $routeParams.id}, function () {
-            $scope.$root.activeTab += ' ' + $scope.player.name + ' ' + $scope.player.surname;
-            $scope.player.division = $scope.divisions[$scope.player.division.value - 1];
-        });
+        $scope.reloadPlayer = function () {
+            $scope.player.$get({id: $routeParams.id}, function () {
+                $scope.$root.activeTab += ' ' + $scope.player.name + ' ' + $scope.player.surname;
+                $scope.player.division = $scope.divisions[$scope.player.division.value - 1];
+            });
+        };
         $scope.editTemplate = function ($event, player, tplName) {
             if ($scope.template[tplName]) {
                 $scope.template[tplName] = null;
@@ -43,10 +45,25 @@ angular.module('projApp')
         $scope.hideControls = function () {
             $scope.acl.resources.BOXERS = ! $scope.acl.resources.BOXERS;
         };
-
+        $scope.fullEditView = function () {
+            $modal({
+                scope: $scope, template: 'views/forms/boxer-full-edit-modal.html', show: true,
+                prefixEvent: "user.fullEdit"
+            });
+        };
         acl.afterInit = function () {
             if ( ! acl.hasAccessResource('BOXERS')) {
                 angular.element('#hide-controls').remove();
             }
         };
+        $scope.$on('user.fullEdit.hide', function (e, $modal) {
+            $scope.reloadPlayer();
+        });
+        $scope.reloadPlayer();
+//var myOtherModal = $modal({scope: $scope, template: 'views/forms/boxer-full-edit-modal.html', show: false});
+//    // Show when some event occurs (use $promise property to ensure the template has been loaded)
+//$scope.showModal = function() {
+//    $scope.content= 'cc';
+//  myOtherModal.$promise.then(myOtherModal.show);
+//};
     });

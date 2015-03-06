@@ -1,0 +1,74 @@
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="$hide()">&times;</button>
+                <h4 class="modal-title">{$ player.name $} {$ player.surname $}</h4>
+            </div>
+            <div class="modal-body">
+                <!-- {full-name -->
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input ng-model="player.name" type="text" class="form-control" id="name" placeholder="Imię">
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.name">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Surname</label>
+                        <input ng-model="player.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.surname">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+                <!-- full-name} -->
+                <!-- {description -->
+                    <div class="form-group">
+                        <label for="description">Opis</label>
+                        <textarea ng-model="player.description" type="text" class="form-control" id="description" placeholder="Imię">
+
+                        </textarea>
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.description">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+                <!-- description} -->
+                <!-- {birthdate -->
+                    <div class="form-group">
+                        <label for="birthdate">Urodzony</label>
+                        <input ng-model="player.birthdate" type="text" class="form-control" id="birthdate" placeholder="Urodzony">
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.birthdate">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+                <!-- birthdate} -->
+                <!-- {divisiton -->
+                    <div class="form-group">
+                        <label for="division">Kategoria</label>
+                        <select ng-model="player.division" id="division" ng-options="di as di.label for di in divisions">
+                        </select>
+                        <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.division">
+                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                          <span class="sr-only">Error:</span>
+                          {$ error $}
+                        </div>
+                    </div>
+                <!-- division} -->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="$hide()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,14 +5,22 @@
         <div ng-show="acl.resources.BOXERS" class="btn-group dropdown pull-right">
             <button ng-click="player.$update()"
                     class="btn btn-info btn-lg">
-                <i class="glyphicon glyphicon-refresh"></i> Zapisz
+                <i class="glyphicon glyphicon-floppy-open"></i> Zapisz
             </button>
             <button type="button" class="btn btn-info btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
+
+<!--<a type="button" -->
+   <!--data-animation="am-fade-and-slide-top" -->
+   <!--data-template="views/forms/boxer-full-edit-modal.html" bs-modal="modal">-->
+    <!--Custom Modal-->
+<!--</a>-->
             <ul class="dropdown-menu" role="menu">
-                <li><a>Pełna Edycja</a></li>
+                <li>
+                    <a ng-click="fullEditView()">Pełna Edycja</a>
+                </li>
                 <li class="divider"></li>
                 <li ng-click="deleteProfile($event, player)"><a>Usuń Profil</a></li>
             </ul>
@@ -21,7 +29,7 @@
 
         <h2>{$ player.name $} {$ player.surname $}</h2>
         <div class="slide-animate" ng-include="template.fullName.url"></div>
-        <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'fullName')"
+        <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'full-name')"
                 class="btn btn-success btn-sm glyphicon glyphicon-edit">
             Edit
         </button>
@@ -90,9 +98,9 @@
             <div ng-repeat="r in player.ratings" class="col-xs-12 col-sm-4 emphasis">
                 <h2><strong> {$ r.value $} </strong></h2>
                 <p><small>{$ r.organization $}</small></p>
-                <div class="slide-animate" ng-include="template['organization' + r.organization].url"></div>
+                <div class="slide-animate" ng-include="template['organization-' + r.organization].url"></div>
                 <button ng-show="acl.resources.BOXERS"
-                        ng-click="editTemplate($event, r, 'organization'+r.organization)"
+                        ng-click="editTemplate($event, r, 'organization-' + r.organization)"
                         class="btn btn-success btn-xs glyphicon glyphicon-edit">
                     Edit
                 </button>
