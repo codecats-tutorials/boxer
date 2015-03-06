@@ -1,0 +1,10 @@
+<div class="form-group">
+    <img src="{$ player.avatar $}" alt="" class="img-circle img-responsive">
+    <label for="avatar">Avatar</label>
+    <input ng-model="player.avatar" type="text" class="form-control" id="avatar" placeholder="Avatar">
+    <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.avatar">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>
