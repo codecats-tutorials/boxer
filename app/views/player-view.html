@@ -1,5 +1,4 @@
 <div class="col-md-12">
-    <label>Single select:&nbsp;</label>
     <div class="well profile">
         <!-- {full edit button -->
         <button id="hide-controls" ng-click="hideControls($event)" class="pull-right glyphicon glyphicon-eye-open"></button>
@@ -39,7 +38,7 @@
             <div class="col-xs-12 col-sm-8">
                 <br>
                 <p>
-                    <strong>Wzrost: </strong> {$ player.height $}
+                    <strong>Wzrost: </strong> {$ player.height $} cm
                     <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'height')"
                             class="btn btn-success btn-xs glyphicon glyphicon-edit">
                         Edit
@@ -47,7 +46,7 @@
                     <div class="slide-animate" ng-include="template.height.url"></div>
                 </p>
                 <p>
-                    <strong>Zasięg: </strong> {$ player.reach $}
+                    <strong>Zasięg: </strong> {$ player.reach $} cm
                     <button ng-show="acl.resources.BOXERS" ng-click="editTemplate($event, player, 'reach')"
                             class="btn btn-success btn-xs glyphicon glyphicon-edit">
                         Edit

@@ -79,14 +79,15 @@ angular
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
   })
-  .run(function run ($http, $cookies, $rootScope) {
-    //for django
-    $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+  .run(function run ($http, $cookies, $rootScope, User) {
+      $rootScope.user = User.getLogin();
+      //for django
+      $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
 
-    //always routing
-    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-      $rootScope.activeTab = next.activeTab;
-    });
+      //always routing
+      $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        $rootScope.activeTab = next.activeTab;
+      });
   });
 
 var app = angular.module('projApp')

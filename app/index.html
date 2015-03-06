@@ -38,6 +38,13 @@
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
+            <div class="pull-right" ng-show="user.isAuthenticated">
+              <a href='' class="btn btn-link">{$ user.email $}</a>
+              <a href="" class="btn btn-link" ng-click="user.$getLogout()">wyloguj</a>
+            </div>
+            <div class="pull-right" ng-hide="user.isAuthenticated" ng-include="'views/forms/login.html'">
+            </div>
+
             <ul class="nav navbar-nav">
               <li ng-class="{active: activeTab == 'main'}"><a href="#/">Home</a></li>
               <li ng-class="{active: activeTab == 'players'}"><a href="#/players">Zawodnicy</a></li>
@@ -107,6 +114,7 @@
         <script src="scripts/services/acl.js"></script>
         <script src="scripts/services/player.js"></script>
         <script src="scripts/controllers/player-view.js"></script>
+        <script src="scripts/services/user.js"></script>
         <!-- endbuild -->
 {#        <script src="scripts/mocks.js"></script>#}
 </body>

@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="height">Wzrost</label>
-    <input ng-model="player.height" type="text" class="form-control" id="height" placeholder="Wzrost">
+    <input ng-model="player.height" type="number" min="130" max="230" class="form-control" id="height" placeholder="Wzrost">
     <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.height">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
