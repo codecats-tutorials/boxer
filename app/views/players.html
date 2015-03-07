@@ -6,9 +6,9 @@
             data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         Dodaj
     </button>
-    <div class="collapse" id="collapseExample">
+    <div ng-show="acl.resources.BOXERS" class="collapse" id="collapseExample">
         <div class="well">
-            <div class="slide-animate" ng-include="template.url"></div>
+            <div class="slide-animate" ng-include="'views/forms/boxer.html'"></div>
         </div>
     </div>
 </div>

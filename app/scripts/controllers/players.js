@@ -8,8 +8,8 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-    .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, acl, Players) {
-        $scope.acl      = acl;
+    .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, $rootScope, Players) {
+        $scope.acl      = $rootScope.acl;
         $scope.player   = Players.newInstance();
         $scope.confirmTemplate = [];
         $scope.updateUsers = function () {
@@ -68,17 +68,19 @@ angular.module('projApp')
                 angular.element($event.currentTarget).addClass('active');
             }
         };
-        acl.afterInit = function () {
-            if (acl.hasAccessResource('BOXERS')) {
+        $scope.initOrganizations = function () {
+            if ($rootScope.acl.hasAccessResource('BOXERS')) {
                 $http.get('organizations/').then(function (data) {
                     $scope.availableOrganizations = data.data;
                 });
-                $scope.template = {'url': 'views/forms/boxer.html'};
             }
+        };
+        $rootScope.acl.afterInit = function () {
+            $scope.initOrganizations();
         };
 
         angular.element('body').addClass('loading');
-
+        $scope.initOrganizations();
         $scope.updateUsers();
         //$http.get('/players').then(function (response) {
         //    $scope.chunkedPlayers = chunker.getChunks(response.data, 3);

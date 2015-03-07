@@ -40,7 +40,11 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <div class="pull-right" ng-show="user.isAuthenticated">
               <a href='' class="btn btn-link">{$ user.email $}</a>
-              <a href="" class="btn btn-link" ng-click="user.$getLogout()">wyloguj</a>
+              <a href="" class="btn btn-link" ng-click="logout()">wyloguj</a>
+              <button id="hide-controls" ng-click="hideControls($event)"
+                class="pull-right glyphicon glyphicon-eye-open"
+                ng-show="acl.resources.BOXERS === true || acl.resources.BOXERS === false"
+              ></button>
             </div>
             <div class="pull-right" ng-hide="user.isAuthenticated" ng-include="'views/forms/login.html'">
             </div>

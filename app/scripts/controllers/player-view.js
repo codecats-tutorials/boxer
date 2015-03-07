@@ -8,8 +8,8 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-    .controller('PlayerViewCtrl', function ($scope, $routeParams, Players, acl, $modal) {
-        $scope.acl      = acl;
+    .controller('PlayerViewCtrl', function ($scope, $routeParams, Players, $rootScope, $modal) {
+        $scope.acl      = $rootScope.acl;
         $scope.template = {};
         $scope.player   = Players.newInstance();
         $scope.divisions = [
@@ -42,20 +42,19 @@ angular.module('projApp')
                 $scope.player.$delete();
             }
         });
-        $scope.hideControls = function () {
-            $scope.acl.resources.BOXERS = ! $scope.acl.resources.BOXERS;
-        };
         $scope.fullEditView = function () {
             $modal({
                 scope: $scope, template: 'views/forms/boxer-full-edit-modal.html', show: true,
                 prefixEvent: "user.fullEdit"
             });
         };
-        acl.afterInit = function () {
-            if ( ! acl.hasAccessResource('BOXERS')) {
-                angular.element('#hide-controls').remove();
-            }
-        };
+
+        //$scope.acl.afterInit(function () {
+        //    if ( ! $scope.acl.hasAccessResource('BOXERS')) {
+        //        angular.element('#hide-controls').remove();
+        //    };
+        //});
+
         $scope.$on('user.fullEdit.hide', function (e, $modal) {
             $scope.reloadPlayer();
         });

@@ -79,8 +79,9 @@ angular
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
   })
-  .run(function run ($http, $cookies, $rootScope, User) {
+  .run(function run ($http, $cookies, $rootScope, User, acl) {
       $rootScope.user = User.getLogin();
+      $rootScope.acl = acl;
       //for django
       $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
 
@@ -88,6 +89,17 @@ angular
       $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         $rootScope.activeTab = next.activeTab;
       });
+      $rootScope.logout = function () {
+        $rootScope.user.$getLogout();
+        $rootScope.acl.resources = {};
+      };
+      $rootScope.login = function () {
+        $rootScope.user.$postLogin();
+        $rootScope.acl.reload();
+      };
+      $rootScope.hideControls = function () {
+          $rootScope.acl.resources.BOXERS = ! $rootScope.acl.resources.BOXERS;
+      };
   });
 
 var app = angular.module('projApp')
