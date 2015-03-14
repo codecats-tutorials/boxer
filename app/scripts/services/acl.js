@@ -31,11 +31,14 @@ angular.module('projApp')
         this.removeAccessResource = function () {
 
         };
-        this.reload = function () {
+        this.reload = function (callback) {
             $http.get('/acl').then(function (data) {
                 me.resourceBin = data.data;
                 for (var i in me.resourceBin) {
                     me.resources[me.resourceBin[i]] = true;
+                }
+                if (typeof(callback) === 'function') {
+                    callback();
                 }
                 me.afterInit();
             });

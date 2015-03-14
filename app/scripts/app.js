@@ -90,12 +90,21 @@ angular
         $rootScope.activeTab = next.activeTab;
       });
       $rootScope.logout = function () {
-        $rootScope.user.$getLogout();
+        angular.element('body').addClass('loading');
+        $rootScope.user.$getLogout(function () {
+          $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+          angular.element('body').removeClass('loading');
+        });
         $rootScope.acl.resources = {};
       };
       $rootScope.login = function () {
-        $rootScope.user.$postLogin();
-        $rootScope.acl.reload();
+        angular.element('body').addClass('loading');
+        $rootScope.user.$postLogin(function () {
+          $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+          $rootScope.acl.reload(function () {
+            angular.element('body').removeClass('loading');
+          });
+        });
       };
       $rootScope.hideControls = function () {
           $rootScope.acl.resources.BOXERS = ! $rootScope.acl.resources.BOXERS;

@@ -8,7 +8,9 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-    .controller('PlayersCtrl', function ($scope, $http, $compile, chunker, $rootScope, Players) {
+    .controller('PlayersCtrl', function (
+        $scope, $http, $compile, chunker, $rootScope, Players, $alert
+    ) {
         $scope.acl      = $rootScope.acl;
         $scope.player   = Players.newInstance();
         $scope.confirmTemplate = [];
@@ -37,6 +39,13 @@ angular.module('projApp')
                     if (data.id) {
                         //$scope.player = Players.newInstance(data);
                         $scope.player = Players.newInstance({});
+                        //close collapse
+                        element.closest('.collapse').prev().trigger('click');
+                        $alert({
+                            title: 'Sukces!',
+                            content: 'Nowy zawodnik dodany.',
+                            placement: 'top', type: 'info', show: true, duration: 5
+                        });
                     }
                     $scope.updateUsers();
                     element.removeClass('loading')

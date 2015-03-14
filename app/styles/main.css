@@ -94,6 +94,12 @@ body {
     height: auto;
 }
 
+.alert {
+  left: 50%;
+  top: 10px;
+  position: fixed;
+}
+
 .b {
     border: 1px solid black;
 }
