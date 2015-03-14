@@ -8,13 +8,8 @@
  * Service in the projApp.
  */
 angular.module('projApp')
-  .service('User', function ($resource) {
-        var Users = $resource('/users/:id', {id: '@id'}, {
-            'save'        : {method: 'POST'},
-            'query'       : {method: 'GET', isArray: true},
-            'update'      : {method: 'PUT'},
-            'delete'      : {method: 'DELETE'},
-
+  .service('User', function (RestResource) {
+        var Users = RestResource('/users/:id', {id: '@id'}, {
             'getLogin'    : {method: 'GET', params: {id: 'login'}},
             'getLogout'   : {method: 'GET', params: {id: 'logout'}},
             'postLogin'   : {method: 'POST', params: {id: 'login'}}

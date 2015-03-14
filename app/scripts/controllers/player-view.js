@@ -17,9 +17,11 @@ angular.module('projApp')
             { label: 'Pół ciężka', value: 2 }
         ];
         $scope.reloadPlayer = function () {
+            angular.element('body').addClass('loading');
             $scope.player.$get({id: $routeParams.id}, function () {
                 $scope.$root.activeTab += ' ' + $scope.player.name + ' ' + $scope.player.surname;
                 $scope.player.division = $scope.divisions[$scope.player.division.value - 1];
+                angular.element('body').removeClass('loading');
             });
         };
         $scope.editTemplate = function ($event, player, tplName) {
@@ -36,6 +38,12 @@ angular.module('projApp')
                 scope: $scope, contentTemplate: 'views/confirm/modal.html'
             });
         };
+        $scope.saveProfile = function ($event, player) {
+            angular.element('body').addClass('loading');
+            player.$save(function () {
+                angular.element('body').removeClass('loading');
+            });
+        };
         $scope.$on('user.delete.show', function(e, $modal){
             $modal.$scope.action = function () {
                 $modal.$scope.$hide();
@@ -48,7 +56,14 @@ angular.module('projApp')
                 prefixEvent: "user.fullEdit"
             });
         };
-
+        $scope.$on('user.fullEdit.show', function (e, $modal) {
+            $modal.$scope.action = function () {
+                $scope.player.$save(function () {
+                    $modal.$scope.reload = false;
+                    $modal.$scope.$hide();
+                })
+            }
+        });
         //$scope.acl.afterInit(function () {
         //    if ( ! $scope.acl.hasAccessResource('BOXERS')) {
         //        angular.element('#hide-controls').remove();
@@ -56,6 +71,7 @@ angular.module('projApp')
         //});
 
         $scope.$on('user.fullEdit.hide', function (e, $modal) {
+            if (typeof($modal.$scope.reload) !== 'undefined' && $modal.$scope.reload === false) return true;
             $scope.reloadPlayer();
         });
         $scope.reloadPlayer();

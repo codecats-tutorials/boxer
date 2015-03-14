@@ -27,7 +27,7 @@ virtualenv venv
 ```
 Activate it
 ```bash
-source $_/bin/activate
+source venv/bin/activate
 ```
 Go to backend content
 ```bash

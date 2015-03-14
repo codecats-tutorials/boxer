@@ -8,12 +8,9 @@
  * Factory in the projApp.
  */
 angular.module('projApp')
-  .factory('Players', function ($resource) {
-        var Players = $resource('/players/:id', {id: '@id'}, {
-            'save'  : {method: 'POST'},
-            'query' : {method: 'GET', isArray: true},
-            'update': {method: 'PUT'},
-            'delete': {method: 'DELETE'}
+  .factory('Players', function (RestResource) {
+        var Players = RestResource('/players/:id', {id: '@id'}, {
+
         });
         Players.newInstance = function (data) {
             if (typeof data === 'undefined') data = {};
