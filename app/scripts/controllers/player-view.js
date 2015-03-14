@@ -8,7 +8,10 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-    .controller('PlayerViewCtrl', function ($scope, $routeParams, Players, $rootScope, $modal) {
+    .controller('PlayerViewCtrl', function (
+        $scope, $routeParams, Players, $rootScope, $modal, $location
+    ) {
+        var viewport    = angular.element('body');
         $scope.acl      = $rootScope.acl;
         $scope.template = {};
         $scope.player   = Players.newInstance();
@@ -17,11 +20,11 @@ angular.module('projApp')
             { label: 'Pół ciężka', value: 2 }
         ];
         $scope.reloadPlayer = function () {
-            angular.element('body').addClass('loading');
+            viewport.addClass('loading');
             $scope.player.$get({id: $routeParams.id}, function () {
                 $scope.$root.activeTab += ' ' + $scope.player.name + ' ' + $scope.player.surname;
                 $scope.player.division = $scope.divisions[$scope.player.division.value - 1];
-                angular.element('body').removeClass('loading');
+                viewport.removeClass('loading');
             });
         };
         $scope.editTemplate = function ($event, player, tplName) {
@@ -39,15 +42,19 @@ angular.module('projApp')
             });
         };
         $scope.saveProfile = function ($event, player) {
-            angular.element('body').addClass('loading');
+            viewport.addClass('loading');
             player.$save(function () {
-                angular.element('body').removeClass('loading');
+                viewport.removeClass('loading');
             });
         };
         $scope.$on('user.delete.show', function(e, $modal){
             $modal.$scope.action = function () {
                 $modal.$scope.$hide();
-                $scope.player.$delete();
+                viewport.addClass('loading');
+                $scope.player.$delete(function () {
+                    viewport.removeClass('loading');
+                    $location.path('/players')
+                });
             }
         });
         $scope.fullEditView = function () {
