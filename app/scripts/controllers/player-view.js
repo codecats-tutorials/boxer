@@ -44,6 +44,7 @@ angular.module('projApp')
         $scope.saveProfile = function ($event, player) {
             viewport.addClass('loading');
             player.$save(function () {
+                $scope.template = {};
                 viewport.removeClass('loading');
             });
         };

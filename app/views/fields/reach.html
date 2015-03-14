@@ -1,6 +1,8 @@
 <div class="form-group">
     <label for="reach">Zasięg</label>
-    <input ng-model="player.reach" type="text" class="form-control" id="reach" placeholder="Zasięg">
+    <label class="label label-warning">min. 130, max 230</label>
+    <input ng-model="player.reach" type="number" min="130" max="230"
+           class="form-control" id="reach" placeholder="Zasięg">
     <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.reach">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
