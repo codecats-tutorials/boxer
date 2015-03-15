@@ -8,17 +8,11 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-  .controller('CoachesCtrl', function ($scope) {
+  .controller('CoachesCtrl', function ($scope, Coach) {
+    var viewport = angular.element('body');
+    viewport.addClass('loading');
     $scope.template = [];
-    $scope.coaches = [
-      {name: 'Van Balan', surname: 'Eric', players: [{name: 'Wlad', surname: 'Klitshko'}]},
-      {name: 'Van Balan1', surname: 'Eric1',
-        players: [
-          {name: 'Wlad2', surname: 'Klitshko2'},
-          {name: 'Wlad3', surname: 'Klitshko3'}
-        ]
-      }
-    ];
+    $scope.coaches = Coach.query(function () {viewport.removeClass('loading')});
     $scope.editRow = function ($event, id) {
         if (angular.element($event.target).is('button,a')) return;
         $scope.template[id] = {
@@ -29,7 +23,9 @@ angular.module('projApp')
 
     };
     $scope.editRowDismiss = function ($event, id) {
+      viewport.addClass('loading');
       if ($scope.template[id]) {
+        $scope.coaches[id].$get(function () {viewport.removeClass('loading');});
         $scope.template[id] = null;
         var tplEditting = false;
         for (var i in $scope.template) {
@@ -42,6 +38,22 @@ angular.module('projApp')
         }
       }
     };
-
+    $scope.saveCoach = function ($event, coach) {
+      viewport.addClass('loading');
+      coach.$save(function () {
+        //todo: check if error
+        //$scope.editRowDismiss($event, index);
+        viewport.removeClass('loading');
+      });
+    };
+    $scope.removeCoach = function ($event, coach, index) {
+      viewport.addClass('loading');
+      coach.$delete(function () {
+        //todo: check if error
+        $scope.editRowDismiss($event, index);
+        $scope.coaches.splice(index, 1);
+        viewport.removeClass('loading');
+      });
+    };
 
   });

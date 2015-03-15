@@ -139,4 +139,29 @@ angular.module('projApp')
     $httpBackend.whenGET( RegExp(regEsc('/users/logout'))).respond(function () {
       return [200, {email: '', isAuthenticated: false, id: null}, {}]
     });
+    $httpBackend.whenGET(RegExp(regEsc('/coaches') + '$')).respond(function () {
+      var coaches = [
+        {id:'134aaweb3', name: 'Van Balan', surname: 'Eric', players: [{name: 'Wlad', surname: 'Klitshko'}]},
+        {id: 'abd32e93s', name: 'Van Balan1', surname: 'Eric1',
+          players: [
+            {name: 'Wlad2', surname: 'Klitshko2'},
+            {name: 'Wlad3', surname: 'Klitshko3'}
+          ]
+        }
+      ];
+      return [200, coaches, {}];
+    });
+    $httpBackend.whenGET(RegExp(regEsc('/coaches/'))).respond(function () {
+      return [200, {
+        id: arguments[1].match('[a-zA-Z0-9]+$')[0], name: 'Eric', surname: 'Van Dalam', players: []
+      }, {}];
+    });
+    $httpBackend.whenDELETE( RegExp(regEsc('/coaches/'))).respond(function () {
+      return [200, {}, {}];
+    });
+    $httpBackend.whenPUT( RegExp(regEsc('/coaches/'))).respond(function () {
+      return [200, {
+        id:'32Dfi3r3w', name: 'updated', errors: {name: ['too long']}
+      }, {}];
+    });
   });

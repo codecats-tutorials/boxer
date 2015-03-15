@@ -8,6 +8,17 @@
  * Service in the projApp.
  */
 angular.module('projApp')
-  .service('coach', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+  .factory('Coach', function (RestResource) {
+      var Coach = RestResource('/coaches/:id', {id: '@id'}, {
+
+      });
+
+      angular.extend(Coach.prototype, {
+        'id'      : null,
+        'name'    : null,
+        'surname' : null,
+        'players' : []
+      });
+
+      return Coach;
   });

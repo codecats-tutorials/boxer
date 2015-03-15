@@ -43,5 +43,5 @@ angular.module('projApp')
 
         });
 
-        return Players
+        return Players;
   });

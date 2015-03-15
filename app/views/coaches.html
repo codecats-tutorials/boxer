@@ -15,9 +15,9 @@
     <tbody>
         <tr ng-repeat="coach in coaches track by $index" ng-click="editRow($event, $index)">
             <th scope="row">{$ $index + 1 $}</th>
-            <td>{$ coach.id $}</td>
+            <td>{$ coach.id|limitTo:3 $}</td>
             <td>
-                {$ coach.name $}
+                <span ng-hide="template[$index].coach">{$ coach.name $}</span>
                 <span class="slide-animate" ng-include="template[$index].coach.name.url"></span>
             </td>
             <td>{$ coach.surname $}</td>
@@ -28,10 +28,20 @@
                 </label>
             </td>
             <td>{$ coach.players.length $}</td>
-            <td ng-show="template[$index].coach"><button class="btn btn-xs btn-success">Zapisz</button></td>
-            <td ng-show="template[$index].coach"><button class="btn btn-xs btn-danger">Usuń</button></td>
-            <td ng-show="template[$index].coach" ng-click="editRowDismiss($event, $index)">
-                <button class="btn btn-xs btn-default">Anuluj</button>
+            <td ng-show="template[$index].coach">
+                <button ng-click="saveCoach($event, coach)" class="btn btn-xs btn-success">
+                    Zapisz
+                </button>
+            </td>
+            <td ng-show="template[$index].coach">
+                <button ng-click="removeCoach($event, coach, $index)" class="btn btn-xs btn-danger">
+                    Usuń
+                </button>
+            </td>
+            <td ng-show="template[$index].coach">
+                <button ng-click="editRowDismiss($event, $index)" class="btn btn-xs btn-default">
+                    Anuluj
+                </button>
             </td>
         </tr>
     </tbody>
