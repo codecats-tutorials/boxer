@@ -79,11 +79,13 @@ angular
     $interpolateProvider.startSymbol('{$');
     $interpolateProvider.endSymbol('$}');
   })
-  .run(function run ($http, $cookies, $rootScope, User, acl) {
-      $rootScope.user = User.getLogin();
+  .run(function run ($http, $cookies, $rootScope, User, acl, $alert) {
       $rootScope.acl = acl;
-      //for django
-      $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+      $rootScope.user = User.getLogin(function () {
+        //for django
+        $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
+      });
+
 
       //always routing
       $rootScope.$on( "$routeChangeStart", function(event, next, current) {
@@ -94,16 +96,28 @@ angular
         $rootScope.user.$getLogout(function () {
           $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
           angular.element('body').removeClass('loading');
+          $alert({
+              title: 'Sukces!',
+              content: 'Zostałeś wylogowany.',
+              placement: 'top', type: 'info', show: true, duration: 5
+          });
         });
         $rootScope.acl.resources = {};
       };
       $rootScope.login = function () {
         angular.element('body').addClass('loading');
-        $rootScope.user.$postLogin(function () {
+        $rootScope.user.$postLogin(function (data) {
           $http.defaults.headers.common['X-CSRFToken'] = $cookies['csrftoken'];
           $rootScope.acl.reload(function () {
             angular.element('body').removeClass('loading');
           });
+          if(data.isAuthenticated === true) {
+            $alert({
+                title: 'Sukces!',
+                content: 'Zostałeś zalogowany.',
+                placement: 'top', type: 'info', show: true, duration: 5
+            });
+          }
         });
       };
       $rootScope.hideControls = function () {

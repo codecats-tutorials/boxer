@@ -1,3 +1,11 @@
-<input ng-model="user.email" type="email" />
-<input ng-model="user.password" type="password" />
-<button class="btn btn-default btn-xs" ng-click="login()">Login</button>
+<form>
+    <input ng-model="user.email" type="email" placeholder="e-mail" />
+    <input ng-model="user.password" type="password" placeholder="hasło" />
+    <button class="btn btn-default btn-xs" ng-click="login()">Login</button>
+    <div ng-show="user.loginError">
+        <label class="text text-danger" ng-repeat="error in user.loginError" >
+            {$ error $}
+            <span ng-hide="$last">,&nbsp</span>
+        </label>
+    </div>
+</form>

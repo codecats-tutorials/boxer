@@ -126,9 +126,15 @@ angular.module('projApp')
       return [200, {email: '', isAuthenticated: false, id: null}, {}]
     });
     $httpBackend.whenPOST( RegExp(regEsc('/users/login'))).respond(function () {
+      var date = JSON.parse(arguments[2]);
+      if (date.email.length < 2) {
+        return [200, {
+          email: '', isAuthenticated: false, id: null, loginError: ['too long']
+        }, {}]
+      }
       return [200, {
         email: 'antonio.banderas@gmail.com', isAuthenticated: true, id: 54
-      }, {}]
+      }, {}];
     });
     $httpBackend.whenGET( RegExp(regEsc('/users/logout'))).respond(function () {
       return [200, {email: '', isAuthenticated: false, id: null}, {}]
