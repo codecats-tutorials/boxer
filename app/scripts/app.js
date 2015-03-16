@@ -17,6 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'mgcrea.ngStrap',
+    'ui.bootstrap',
     'ngMockE2E'//if u dont want mock requests anymore delete this module
   ])
   .config(function ($routeProvider) {

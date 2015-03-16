@@ -139,7 +139,7 @@ angular.module('projApp')
     $httpBackend.whenGET( RegExp(regEsc('/users/logout'))).respond(function () {
       return [200, {email: '', isAuthenticated: false, id: null}, {}]
     });
-    $httpBackend.whenGET(RegExp(regEsc('/coaches') + '$')).respond(function () {
+    $httpBackend.whenGET(RegExp(regEsc('/coaches') + '.+page.+$')).respond(function () {
       var coaches = [
         {id:'134aaweb3', name: 'Van Balan', surname: 'Eric', players: [{name: 'Wlad', surname: 'Klitshko'}]},
         {id: 'abd32e93s', name: 'Van Balan1', surname: 'Eric1',
@@ -149,7 +149,7 @@ angular.module('projApp')
           ]
         }
       ];
-      return [200, coaches, {}];
+      return [200, {data: coaches}, {}];
     });
     $httpBackend.whenGET(RegExp(regEsc('/coaches/'))).respond(function () {
       return [200, {

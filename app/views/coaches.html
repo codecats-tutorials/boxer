@@ -44,5 +44,24 @@
                 </button>
             </td>
         </tr>
+        <tr>
+            <td colspan="6">
+                <div class="text-center">
+                    <pagination
+                            ng-change="coachPaginator.pageChanged()"
+                            max-size="10"
+                            boundary-links="true"
+                            total-items="coachPaginator.totalItems"
+                            ng-model="coachPaginator.currentPage"
+                            class="pagination-sm"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;"
+                            last-text="&raquo;"
+                    >
+                    </pagination>
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>

@@ -9,10 +9,33 @@
  */
 angular.module('projApp')
   .controller('CoachesCtrl', function ($scope, Coach) {
-    var viewport = angular.element('body');
+    var viewport  = angular.element('body'),
+        coaches   = null;
     viewport.addClass('loading');
     $scope.template = [];
-    $scope.coaches = Coach.query(function () {viewport.removeClass('loading')});
+
+    $scope.coachPaginator = {};
+    $scope.coachPaginator.totalItems = 0;
+    $scope.coachPaginator.currentPage = 1;
+
+    $scope.coachPaginator.pageChanged = function () {
+      viewport.addClass('loading');
+      coaches = Coach.list({page: $scope.coachPaginator.currentPage}, function () {
+        $scope.coaches = coaches;
+        //todo: request for count
+        $scope.coachPaginator.totalItems = 6666;
+        viewport.removeClass('loading');
+      });
+    };
+
+    coaches = Coach.list({page: $scope.coachPaginator.currentPage}, function () {
+      $scope.coaches = coaches;
+      //todo: request for count
+      $scope.coachPaginator.totalItems = 6666;
+      viewport.removeClass('loading');
+    });
+
+
     $scope.editRow = function ($event, id) {
         if (angular.element($event.target).is('button,a')) return;
         $scope.template[id] = {
@@ -55,5 +78,4 @@ angular.module('projApp')
         viewport.removeClass('loading');
       });
     };
-
   });

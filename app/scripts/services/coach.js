@@ -10,7 +10,11 @@
 angular.module('projApp')
   .factory('Coach', function (RestResource) {
       var Coach = RestResource('/coaches/:id', {id: '@id'}, {
-
+        list:{
+            isArray: true, method: 'GET',
+            transformResponse: function (data, headers) {
+                return data.data;
+            }}
       });
 
       angular.extend(Coach.prototype, {
