@@ -1,0 +1,14 @@
+<div class="form-group">
+
+<button type="button" class="btn btn-default"
+        ng-model="coach.selectedPlayers" data-html="1" data-multiple="1"
+        data-animation="am-flip-x"
+        ng-options="player.id as player.name for player in playersAll" bs-select>
+  Zawodnicy <span class="caret"></span>
+
+    <div class="alert-danger" role="alert" ng-repeat="error in coach.errors.players">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>

@@ -1,4 +1,16 @@
 <table class="table table-striped">
+    <colgroup>
+       <col span="1" style="width: 10%;">
+       <col span="1" style="width: 10%;">
+       <col span="1" style="width: 20%;">
+       <col span="1" style="width: 20%;">
+       <col span="1" style="width: 20%;">
+       <col span="1" style="width: 5%;">
+       <col span="1" style="width: 5%;">
+       <col span="1" style="width: 5%;">
+       <col span="1" style="width: 5%;">
+
+    </colgroup>
     <thead>
         <tr>
             <th>#</th>
@@ -6,7 +18,7 @@
             <th>Imię</th>
             <th>Nazwisko</th>
             <th>Zawodnicy</th>
-            <th>L. zawodników</th>
+            <th>Ilość</th>
             <th ng-show="template.length">#</th>
             <th ng-show="template.length">#</th>
             <th ng-show="template.length">#</th>
@@ -20,14 +32,20 @@
                 <span ng-hide="template[$index].coach">{$ coach.name $}</span>
                 <span class="slide-animate" ng-include="template[$index].coach.name.url"></span>
             </td>
-            <td>{$ coach.surname $}</td>
             <td>
-                <label ng-repeat="player in coach.players">
-                    {$ player.name $} {$ player.surname $}
-                    <span ng-hide="$last">,&nbsp;</span>
-                </label>
+                <span ng-hide="template[$index].coach">{$ coach.surname $}</span>
+                <span class="slide-animate" ng-include="template[$index].coach.surname.url"></span>
             </td>
-            <td>{$ coach.players.length $}</td>
+            <td>
+                <span ng-hide="template[$index].coach">
+                    <label ng-repeat="player in coach.players">
+                        {$ player.name $} {$ player.surname $}
+                        <span ng-hide="$last">,&nbsp;</span>
+                    </label>
+                </span>
+                <span class="slide-animate" ng-include="template[$index].coach.players.url"></span>
+            </td>
+            <td>{$ coach.selectedPlayers.length $}</td>
             <td ng-show="template[$index].coach">
                 <button ng-click="saveCoach($event, coach)" class="btn btn-xs btn-success">
                     Zapisz
@@ -45,7 +63,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="6">
+            <td colspan="9">
                 <div class="text-center">
                     <pagination
                             ng-change="coachPaginator.pageChanged()"

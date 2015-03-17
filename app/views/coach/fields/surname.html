@@ -1,0 +1,8 @@
+<div class="form-group">
+    <input ng-model="coach.surname" type="text" class="form-control" id="surname" placeholder="Nazwisko">
+    <div class="alert-danger" role="alert" ng-repeat="error in coach.errors.surname">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {$ error $}
+    </div>
+</div>

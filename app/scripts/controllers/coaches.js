@@ -7,10 +7,11 @@
  * # CoachesCtrl
  * Controller of the projApp
  */
-angular.module('projApp')
-  .controller('CoachesCtrl', function ($scope, Coach) {
+angular.module('projApp').controller('CoachesCtrl', function ($scope, Coach, Players) {
     var viewport  = angular.element('body'),
         coaches   = null;
+
+    $scope.playersAll = Players.query();
     viewport.addClass('loading');
     $scope.template = [];
 
@@ -22,25 +23,28 @@ angular.module('projApp')
       viewport.addClass('loading');
       coaches = Coach.list({page: $scope.coachPaginator.currentPage}, function () {
         $scope.coaches = coaches;
-        //todo: request for count
-        $scope.coachPaginator.totalItems = 6666;
+        Coach.count(function (count) {
+          $scope.coachPaginator.totalItems = count;
+        });
         viewport.removeClass('loading');
       });
     };
 
     coaches = Coach.list({page: $scope.coachPaginator.currentPage}, function () {
       $scope.coaches = coaches;
-      //todo: request for count
-      $scope.coachPaginator.totalItems = 6666;
+      Coach.count(function (count) {
+        $scope.coachPaginator.totalItems = count;
+      });
       viewport.removeClass('loading');
     });
-
 
     $scope.editRow = function ($event, id) {
         if (angular.element($event.target).is('button,a')) return;
         $scope.template[id] = {
           coach: {
-            name: {url: 'views/coach/fields/name.html'}
+            name      : {url: 'views/coach/fields/name.html'},
+            surname   : {url: 'views/coach/fields/surname.html'},
+            players   : {url: 'views/coach/fields/players.html'}
           }
         };
 
