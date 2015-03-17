@@ -21,8 +21,12 @@ angular.module('projApp').controller('CoachesCtrl', function (
     $scope.coachPaginator.totalItems = 0;
     $scope.coachPaginator.currentPage = 1;
 
-    $scope.coachPaginator.pageChanged = function () {
+    $scope.coachPaginator.pageChanged = function (e) {
       viewport.addClass('loading');
+      for (var i in $scope.coaches) {
+        $scope.editRowDismiss(e, i);
+      }
+
       coaches = Coach.list({page: $scope.coachPaginator.currentPage}, function () {
         $scope.coaches = coaches;
         Coach.count(function (count) {
