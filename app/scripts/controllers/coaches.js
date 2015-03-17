@@ -7,10 +7,12 @@
  * # CoachesCtrl
  * Controller of the projApp
  */
-angular.module('projApp').controller('CoachesCtrl', function ($scope, Coach, Players) {
+angular.module('projApp').controller('CoachesCtrl', function (
+    $scope, Coach, Players, $rootScope, $modal
+  ) {
     var viewport  = angular.element('body'),
         coaches   = null;
-
+    $scope.acl = $rootScope.acl;
     $scope.playersAll = Players.query();
     viewport.addClass('loading');
     $scope.template = [];
@@ -39,6 +41,7 @@ angular.module('projApp').controller('CoachesCtrl', function ($scope, Coach, Pla
     });
 
     $scope.editRow = function ($event, id) {
+        if ( ! $scope.acl.resources.BOXERS) return;
         if (angular.element($event.target).is('button,a')) return;
         $scope.template[id] = {
           coach: {
@@ -74,12 +77,33 @@ angular.module('projApp').controller('CoachesCtrl', function ($scope, Coach, Pla
       });
     };
     $scope.removeCoach = function ($event, coach, index) {
-      viewport.addClass('loading');
-      coach.$delete(function () {
-        //todo: check if error
-        $scope.editRowDismiss($event, index);
-        $scope.coaches.splice(index, 1);
-        viewport.removeClass('loading');
+      $scope.description = 'Usunąć profil : ' + coach.name + ' ' + coach.surname;
+      $scope.coach = coach;
+      $scope.coachIndex = index;
+      $modal({
+          show: true, prefixEvent: "coach.delete",
+          scope: $scope, contentTemplate: 'views/confirm/modal.html'
       });
+
     };
+    $scope.mouseOver = function ($event) {
+      if ($scope.acl.resources.BOXERS) {
+        angular.element($event.currentTarget).css({cursor:'pointer'});
+      } else {
+        angular.element($event.currentTarget).css({cursor:'auto'});
+      }
+    };
+    $scope.$on('coach.delete.show', function(e, $modal){
+      $modal.$scope.action = function () {
+        $modal.$scope.$hide();
+
+        viewport.addClass('loading');
+        $scope.coach.$delete(function () {
+          //todo: check if error
+          $scope.editRowDismiss(e, $scope.coachIndex);
+          $scope.coaches.splice($scope.coachIndex, 1);
+          viewport.removeClass('loading');
+        });
+      }
+    });
   });
