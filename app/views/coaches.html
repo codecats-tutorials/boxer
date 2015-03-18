@@ -1,12 +1,13 @@
 <table class="table table-striped">
     <colgroup>
-       <col span="1" style="width: 10%;">
-       <col span="1" style="width: 10%;">
-       <col span="1" style="width: 20%;">
-       <col span="1" style="width: 20%;">
-       <col span="1" style="width: 20%;">
-       <col span="1" style="width: 5%;">
-       <col span="1" style="width: 5%;">
+        <col span="1" style="width: 5%;">
+        <col span="1" style="width: 5%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 5%;">
+        <col span="1" style="width: 15%;">
+        <col span="1" style="width: 5%;">
     </colgroup>
     <thead>
         <tr>
@@ -16,6 +17,7 @@
             <th>Nazwisko</th>
             <th>Zawodnicy</th>
             <th>Ilość</th>
+            <th>Ranga</th>
             <th ng-show="template.length">#</th>
         </tr>
     </thead>
@@ -44,6 +46,26 @@
                 <span class="slide-animate" ng-include="template[$index].coach.players.url"></span>
             </td>
             <td>{$ coach.selectedPlayers.length $}</td>
+            <td>
+                <rating
+                        ng-model="coach.rate" max="max" readonly="isReadonly"
+                        on-hover="hoveringOver(value, coach)"
+                        on-leave="coach.overStar = null"
+                        ng-click="vote($event, coach)"
+                >
+                </rating>
+                <span
+                        class="label"
+                        ng-class="{
+                            'label-warning': coach.percent<30,
+                            'label-info': coach.percent>=30 && coach.percent<70,
+                            'label-success': coach.percent>=70
+                        }"
+                        ng-show="coach.overStar && ! isReadonly && ! coach.isReadonly"
+                >
+                    {$ coach.percent $}%
+                </span>
+            </td>
             <td ng-show="template[$index].coach">
                 <div ng-show="acl.resources.BOXERS" class="btn-group-vertical" role="group" aria-label="Toolbar">
                     <button ng-click="saveCoach($event, coach)" class="btn btn-xs btn-success">

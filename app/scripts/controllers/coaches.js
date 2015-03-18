@@ -8,10 +8,14 @@
  * Controller of the projApp
  */
 angular.module('projApp').controller('CoachesCtrl', function (
-    $scope, Coach, Players, $rootScope, $modal
+    $scope, Coach, Players, $rootScope, $modal, $http
   ) {
     var viewport  = angular.element('body'),
         coaches   = null;
+
+    $scope.max = Coach.RATE_MAX;
+    $scope.isReadonly = false;
+
     $scope.acl = $rootScope.acl;
     $scope.playersAll = Players.query();
     viewport.addClass('loading');
@@ -46,7 +50,7 @@ angular.module('projApp').controller('CoachesCtrl', function (
 
     $scope.editRow = function ($event, id) {
         if ( ! $scope.acl.resources.BOXERS) return;
-        if (angular.element($event.target).is('button,a')) return;
+        if (angular.element($event.target).is('button,a,i')) return;
         $scope.template[id] = {
           coach: {
             name      : {url: 'views/coach/fields/name.html'},
@@ -110,4 +114,15 @@ angular.module('projApp').controller('CoachesCtrl', function (
         });
       }
     });
+    $scope.hoveringOver = function (value, coach) {
+      coach.overStar = value;
+      coach.percent = 100 * (value / $scope.max);
+    };
+    $scope.vote = function ($event, coach) {
+      $http.post('/vote/coach/' + coach.id, {rate: coach.rate}).then(function () {
+        coach.isReadonly = true;
+        coach.vote = coach.rate;
+      });
+    }
+
   });

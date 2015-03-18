@@ -16,6 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.calendar',
     'ui.bootstrap',
     'mgcrea.ngStrap',
     'ngMockE2E'//if u dont want mock requests anymore delete this module

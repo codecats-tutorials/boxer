@@ -141,10 +141,10 @@ angular.module('projApp')
     });
     $httpBackend.whenGET(RegExp(regEsc('/coaches') + '.+page.+$')).respond(function () {
       var coaches = [
-        {id:'134aaweb3', name: 'Van Balan', surname: 'Eric',
+        {id:'134aaweb3', name: 'Van Balan', surname: 'Eric', rate: 4,
           players: [{id: 'lf1xd32e93s', name: 'Wlad', surname: 'Klitshko'}]
         },
-        {id: 'abd32e93s', name: 'Van Balan1', surname: 'Eric1',
+        {id: 'abd32e93s', name: 'Van Balan1', surname: 'Eric1', rate: 2,
           players: [
             {id: 'xe332e6h', name: 'Wlad2', surname: 'Klitshko2'},
             {id: '23e32e9hs', name: 'Wlad3', surname: 'Klitshko3'}
@@ -169,4 +169,8 @@ angular.module('projApp')
         id:'32Dfi3r3w', name: 'updated', errors: {name: ['too long']}
       }, {}];
     });
+    $httpBackend.whenPOST( RegExp(regEsc('/vote/coach/'))).respond(function () {
+      return [200, {}, {}];
+    });
+
   });
