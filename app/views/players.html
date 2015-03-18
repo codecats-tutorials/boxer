@@ -13,12 +13,12 @@
     </div>
 </div>
 
-<div class="row" ng-repeat="players in chunkedPlayers">
+<div class="row bounce animated" ng-repeat="players in chunkedPlayers">
     <div class="col-md-4" ng-repeat="player in players">
         <div class="clearfix"></div>
         <div ng-show="confirmTemplate[player.id]" class="thumbnail slide-animate" ng-include="confirmTemplate[player.id]"></div>
         <div ng-hide="confirmTemplate[player.id]" class="thumbnail">
-            <img src="{$ player.avatar $}" alt="avatar" class="img-responsive"/>
+            <img src="{$ player.avatar $}" alt="avatar" class="img-responsive animated zoomInRight"/>
             <div class="caption">
                 <h3>
                     <a href="#/player-view/{$ player.id $}" class="btn btn-link">

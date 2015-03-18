@@ -98,8 +98,21 @@ body {
   left: 50%;
   top: 10px;
   position: fixed;
+  -webkit-animation: slide 0.5s forwards;
+  animation: slide 0.5s forwards;
 }
 
 .b {
     border: 1px solid black;
+}
+
+
+@-webkit-keyframes slide {
+  0% {left: 0;}
+  100% { left: 50%;}
+}
+
+@keyframes slide {
+  0% {left: 0;}
+  100% { left: 50%;}
 }

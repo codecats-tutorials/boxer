@@ -8,8 +8,7 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-  .controller('AgendaCtrl', function ($scope) {
-
+  .controller('AgendaCtrl', function ($scope, $alert) {
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -51,15 +50,15 @@ angular.module('projApp')
     };
     /* alert on eventClick */
     $scope.alertOnEventClick = function( date, jsEvent, view){
-        $scope.alertMessage = (date.title + ' was clicked ');
+      $alert({title: (date.title + ' was clicked ')});
     };
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+       $alert({title: ('Event Droped to make dayDelta ' + delta)});
     };
     /* alert on Resize */
     $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+      $alert({title: ('Event Resized to make dayDelta ' + delta)});
     };
     /* add and removes an event source of choice */
     $scope.addRemoveEventSource = function(sources,source) {

@@ -25,6 +25,10 @@
         <tr
                 ng-mouseover="mouseOver($event)"
                 ng-repeat="coach in coaches track by $index" ng-click="editRow($event, $index)"
+                ng-class="
+                    {'animated slideInRight': ! template[$index].coach && $index % 2,
+                    'animated slideInLeft': ! template[$index].coach && ! $index %2}
+                "
         >
             <th scope="row">{$ $index + 1 $}</th>
             <td>{$ coach.id|limitTo:3 $}</td>
