@@ -11,7 +11,12 @@
     </colgroup>
     <thead>
         <tr>
-            <th>#</th>
+            <th>
+                <button id="add-row" ng-click="addCoach($event)"
+                        class="btn btn-success btn-xs glyphicon glyphicon-plus">
+
+                </button>
+            </th>
             <th>ID</th>
             <th>Imię</th>
             <th>Nazwisko</th>
@@ -75,7 +80,9 @@
                     <button ng-click="saveCoach($event, coach)" class="btn btn-xs btn-success">
                         Zapisz
                     </button>
-                    <button ng-click="removeCoach($event, coach, $index)" class="btn btn-xs btn-danger">
+                    <button ng-click="removeCoach($event, coach, $index)" class="btn btn-xs btn-danger"
+                            ng-show="coach.id"
+                    >
                         Usuń
                     </button>
                     <button ng-click="editRowDismiss($event, $index)" class="btn btn-xs btn-default">

@@ -11,6 +11,12 @@ angular.module('projApp')
     .controller('PlayersCtrl', function (
         $scope, $http, $compile, chunker, $rootScope, Players, $alert
     ) {
+    $scope.list_of_string = ['tag1', 'tag2']
+    $scope.select2Options = {
+        'multiple': true,
+        'simple_tags': true,
+        'tags': ['tag1', 'tag2', 'tag3', 'tag4']  // Can be empty list.
+    };
         $scope.acl      = $rootScope.acl;
         $scope.player   = Players.newInstance();
         $scope.confirmTemplate = [];
@@ -56,6 +62,9 @@ angular.module('projApp')
             if ($scope.confirmTemplate[player.id]) {
                 $scope.confirmTemplate[player.id] = null;
             } else {
+                angular.element('html, body').animate({
+                    scrollTop: angular.element($event.currentTarget).closest('div').offset().top
+                }, 1000);
                 $scope.confirmTemplate[player.id] = 'views/confirm/delete.html';
             }
         };
@@ -75,6 +84,9 @@ angular.module('projApp')
             } else {
                 player.template = {'url': 'views/forms/boxer.html'};
                 angular.element($event.currentTarget).addClass('active');
+                angular.element('html, body').animate({
+                    scrollTop: angular.element($event.currentTarget).offset().top
+                }, 1000);
             }
         };
         $scope.initOrganizations = function () {

@@ -1,9 +1,9 @@
 <div class="form-group">
     <label for="division">Kategoria</label>
-    <button id="division" type="button" class="btn btn-default" ng-model="player.division" data-html="1"
-            ng-options="di as di.label for di in divisions" bs-select>
-      Wybierz kategorię <span class="caret"></span>
-    </button>
+    <select id="division" class="form-control"
+            ng-model="player.division" ng-options="di as di.label for di in divisions">
+
+    </select>
     <div class="alert alert-danger" role="alert" ng-repeat="error in player.errors.division">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>

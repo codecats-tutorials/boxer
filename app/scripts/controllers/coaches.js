@@ -8,7 +8,7 @@
  * Controller of the projApp
  */
 angular.module('projApp').controller('CoachesCtrl', function (
-    $scope, Coach, Players, $rootScope, $modal, $http
+    $scope, $timeout, Coach, Players, $rootScope, $modal, $http
   ) {
     var viewport  = angular.element('body'),
         coaches   = null;
@@ -63,7 +63,14 @@ angular.module('projApp').controller('CoachesCtrl', function (
     $scope.editRowDismiss = function ($event, id) {
       viewport.addClass('loading');
       if ($scope.template[id]) {
-        $scope.coaches[id].$get(function () {viewport.removeClass('loading');});
+        if ($scope.coaches[id].id !== null) {
+          $scope.coaches[id].$get(function () {viewport.removeClass('loading');});
+        } else {
+          $timeout(function () {
+            angular.element('#add-row').triggerHandler('click');
+          }, 0);
+          viewport.removeClass('loading');
+        }
         $scope.template[id] = null;
         var tplEditting = false;
         for (var i in $scope.template) {
@@ -123,6 +130,25 @@ angular.module('projApp').controller('CoachesCtrl', function (
         coach.isReadonly = true;
         coach.vote = coach.rate;
       });
-    }
+    };
+    $scope.addCoach = function ($event) {
+      var element = angular.element($event.target);
+      if ( ! element.hasClass('active')) {
+        element.addClass('active');
+        element.removeClass('glyphicon-plus');
+        element.addClass('glyphicon-minus');
+        $scope.template.unshift(null);
+        $scope.coaches.unshift(new Coach());
+        $scope.editRow({target: null}, 0);
+      } else {
+        element.removeClass('active');
+        element.removeClass('glyphicon-minus');
+        element.addClass('glyphicon-plus');
+        $scope.template.splice(0, 1);
+        $scope.coaches.splice(0, 1);
+      }
+
+
+    };
 
   });
