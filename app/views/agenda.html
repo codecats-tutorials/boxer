@@ -1,1 +1,34 @@
-<div ui-calendar="uiConfig.calendar" class="span8 calendar animated rubberBand" ng-model="eventSources"></div>
+<div class="row">
+    <div class="row">
+        <h3>{$ event.title $}</h3>
+        <form class="form form-horizontal">
+            <div class="form-group">
+                <div class="">
+                    <input class="form-control" ng-model="" type="" placeholder="date" />
+                    <div ng-show="user.loginError">
+                        <label class="text text-danger" ng-repeat="error in user.loginError" >
+                            {$ error $}
+                            <span ng-hide="$last">,&nbsp</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-8">
+                    <button class="btn btn-danger glyphicon glyphicon-remove" ng-click=""> Anuluj</button>
+                    <button class="btn btn-success glyphicon glyphicon-user" ng-click=""> Zapisz</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="row">
+        <div
+                ui-calendar="uiConfig.calendar"
+                class="col-md-12 calendar animated rubberBand"
+                ng-model="eventSources"
+        >
+
+        </div>
+    </div>
+</div>

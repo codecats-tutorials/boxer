@@ -19,6 +19,7 @@ angular
     'ui.calendar',
     'ui.bootstrap',
     'mgcrea.ngStrap',
+    'angular-spinkit',
     'ngMockE2E'//if u dont want mock requests anymore delete this module
   ])
   .config(function ($routeProvider) {

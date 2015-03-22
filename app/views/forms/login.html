@@ -1,7 +1,14 @@
-<form>
-    <input ng-model="user.email" type="email" placeholder="e-mail" />
-    <input ng-model="user.password" type="password" placeholder="hasło" />
-    <button class="btn btn-default btn-xs" ng-click="login()">Login</button>
+<form class="form form-horizontal row">
+    <div class="form-group col-md-5">
+        <div class="">
+            <input class="form-control" ng-model="user.email" type="email" placeholder="e-mail" />
+
+        </div>
+    </div>
+    <div class="form-group col-md-5">
+        <input class="form-control" ng-model="user.password" type="password" placeholder="hasło" />
+    </div>
+    <button class="btn btn-success glyphicon glyphicon-user" ng-click="login()"> Zaloguj</button>
     <div ng-show="user.loginError">
         <label class="text text-danger" ng-repeat="error in user.loginError" >
             {$ error $}
