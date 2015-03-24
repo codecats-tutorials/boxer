@@ -182,12 +182,28 @@ angular.module('projApp')
       if (arguments[1].indexOf('start') !== -1) m += 1;
       return [200, [
         //{title: 'All Day Event',start: new Date(y, m, 1)},
-        {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-        {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-        {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-        {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-        {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+        {id: 'pf03s', title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+        {id: 'oer2',title: 'Repeating Event', description: 'descr',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+        {id: '9923scw',title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+        {id: 'af32', title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+        {id: 'n84l', title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: '#/agenda'}
       ], {}];
     });
-
+    $httpBackend.whenPOST( RegExp(regEsc('events'))).respond(function () {
+      var date = JSON.parse(arguments[2]);
+      if (date.title.length < 2) {
+        date.errors = {'title': ['too short']};
+        return [200, date, {}];
+      }
+      date.id = '34if2xg0';
+      return [200, date, {}];
+    });
+    $httpBackend.whenPUT( RegExp(regEsc('events'))).respond(function () {
+      var date = JSON.parse(arguments[2]);
+      if (date.title.length < 2) {
+        date.errors = {'title': ['too short']};
+        return [200, date, {}];
+      }
+      return [200, date, {}];
+    });
   });

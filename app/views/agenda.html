@@ -1,28 +1,73 @@
 <div class="row">
-    <div class="row">
+        <h1>Terminarz walk</h1>
+    <div class="row animated bounce" ng-show="acl.resources.BOXERS && event"
+         ng-class="{'bounceOut': ! event}"
+    >
         <h3>{$ event.title $}</h3>
         <form class="form form-horizontal">
             <div class="form-group">
-                <div class="">
-                    <input class="form-control" ng-model="" type="" placeholder="date" />
-                    <div ng-show="user.loginError">
-                        <label class="text text-danger" ng-repeat="error in user.loginError" >
-                            {$ error $}
-                            <span ng-hide="$last">,&nbsp</span>
-                        </label>
-                    </div>
-                </div>
+                <input class="form-control" ng-model="event.title" type="" placeholder="tytuł" />
+                <label class="text text-danger" ng-repeat="error in event.errors.title">
+                    {$ error $}
+                    <span ng-hide="$last">,&nbsp</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" ng-model="event.description" type="" placeholder="Opis"></textarea>
+                <label class="text text-danger" ng-repeat="error in event.errors.description">
+                    {$ error $}
+                    <span ng-hide="$last">,&nbsp</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="event.start" type="" placeholder="Rozpoczęcie"
+                       data-date-format="yyyy-MM-dd" bs-datepicker
+                />
+                <label class="text text-danger" ng-repeat="error in event.errors.start">
+                    {$ error $}
+                    <span ng-hide="$last">,&nbsp</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="event.end" type="" placeholder="Zakończenie"
+                       data-date-format="yyyy-MM-dd" bs-datepicker
+                />
+                <label class="text text-danger" ng-repeat="error in event.errors.end">
+                    {$ error $}
+                    <span ng-hide="$last">,&nbsp</span>
+                </label>
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="event.reminder" type="" placeholder="Przypomnienie"
+                       data-date-format="yyyy-MM-dd" bs-datepicker
+                />
+                <label class="text text-danger" ng-repeat="error in event.errors.reminder">
+                    {$ error $}
+                    <span ng-hide="$last">,&nbsp</span>
+                </label>
             </div>
             <div class="row">
-                <div class="col-md-4 col-md-offset-8">
-                    <button class="btn btn-danger glyphicon glyphicon-remove" ng-click=""> Anuluj</button>
-                    <button class="btn btn-success glyphicon glyphicon-user" ng-click=""> Zapisz</button>
+                <div class="col-md-4">
+                    <button rel-btn="cancel" class="btn btn-danger glyphicon glyphicon-remove" ng-click="event=null"
+                    > Anuluj
+                    </button>
+                    <button class="btn btn-success glyphicon glyphicon-user" ng-click="saveEvent($event)"
+                    > Zapisz
+                    </button>
                 </div>
             </div>
         </form>
     </div>
     <br>
     <div class="row">
+        <button class="btn btn-default pull-right glyphicon glyphicon-tasks"
+                ng-click="addEvent($event)"
+
+        > Dodaj zdarzenie</button>
+    </div>
+    <br>
+    <div class="row">
+
         <div
                 ui-calendar="uiConfig.calendar"
                 class="col-md-12 calendar animated rubberBand"

@@ -13,8 +13,9 @@
         <tr>
             <th>
                 <button id="add-row" ng-click="addCoach($event)"
-                        class="btn btn-success btn-xs glyphicon glyphicon-plus">
-
+                        ng-show="acl.resources.BOXERS"
+                        class="btn btn-success btn-xs glyphicon glyphicon-plus"
+                >
                 </button>
             </th>
             <th>ID</th>

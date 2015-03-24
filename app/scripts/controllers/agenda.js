@@ -8,16 +8,20 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-  .controller('AgendaCtrl', function ($scope, uiCalendarConfig, $alert, Event) {
+  .controller('AgendaCtrl', function (
+        $scope, $rootScope, uiCalendarConfig, $alert, Event, $timeout
+  ) {
     var viewport = angular.element('body');
+    $scope.events = [];
+    $scope.acl = $rootScope.acl;
     $scope.event = null;
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
+    $scope.start = null;
+    $scope.end = null;
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, timezone, callback) {
       viewport.addClass('loading');
+      $scope.start = start;
+      $scope.end = end;
       $scope.events = Event.query({start: start, end: end, timezone: timezone}, function () {
         viewport.removeClass('loading');
         callback($scope.events);
@@ -37,9 +41,7 @@ angular.module('projApp')
         eventClick: function (event, jsEvent, view) {
           $scope.event = event;
         },
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        eventRender: $scope.eventRender
+        eventRender: function () {console.log(arguments)}
       }
     };
     $scope.uiConfig.calendar.dayNames = [
@@ -59,6 +61,28 @@ angular.module('projApp')
 
     /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.eventsF];
+
+    $scope.saveEvent = function (e) {
+      var btn = angular.element(e.target);
+      $scope.event.errors = null;
+      btn.addClass('loading');
+      $scope.event.$save(function (data) {
+        $scope.event.errors = data.errors;
+        btn.removeClass('loading');
+        if (angular.equals($scope.event.errors, {}) || $scope.event.errors === null) {
+          btn.addClass('loading');
+          $scope.events = Event.query({start: $scope.start, end: $scope.end}, function () {
+            btn.removeClass('loading');
+            $timeout(function () {
+              btn.closest('form').find('[rel-btn=cancel]').trigger('click');
+            }, 1);
+          });
+        }
+      });
+    };
+    $scope.addEvent = function (e) {
+      $scope.event = new Event();
+    };
 
 
   });
