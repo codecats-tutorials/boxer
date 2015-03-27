@@ -102,10 +102,6 @@ body {
   animation: slide 0.5s forwards;
 }
 
-.b {
-    border: 1px solid black;
-}
-
 
 @-webkit-keyframes slide {
   0% {left: 0;}
@@ -117,17 +113,237 @@ body {
   100% { left: 50%;}
 }
 
-.bg {
-  background-color:lightgoldenrodyellow;
-background-image:
-radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
-radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
-background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+
+
+
+html,body {
+    margin:0;
+    height:100%
 }
-.bg-img {
-    background-attachment: fixed;
-    background-image: url('../images/boxer.jpg') no-repeat right bottom;
+
+.sky {
+    height:600px;
+    background:#007fd5;
+    position:relative;
+    overflow:hidden;
+    -webkit-animation:sky_background 50s ease-out infinite;
+    -moz-animation:sky_background 50s ease-out infinite;
+    -o-animation:sky_background 50s ease-out infinite;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0)
+}
+
+
+.moon {
+    background:url("http://montanaflynn.me/lab/css-clouds/images/moon.png");
+    position:absolute;
+    left:0;
+    height:100%;
+    width:300%;
+    -webkit-animation:moon 50s linear infinite;
+    -moz-animation:moon 50s linear infinite;
+    -o-animation:moon 50s linear infinite;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0)
+}
+
+
+.clouds_one {
+    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_one.png");
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:300%;
+    -webkit-animation:cloud_one 50s linear infinite;
+    -moz-animation:cloud_one 50s linear infinite;
+    -o-animation:cloud_one 50s linear infinite;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0)
+}
+
+.clouds_two {
+    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_two.png");
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:300%;
+    -webkit-animation:cloud_two 75s linear infinite;
+    -moz-animation:cloud_two 75s linear infinite;
+    -o-animation:cloud_two 75s linear infinite;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0)
+}
+
+.clouds_three {
+    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_three.png");
+    position:absolute;
+    left:0;
+    top:0;
+    height:100%;
+    width:300%;
+    -webkit-animation:cloud_three 100s linear infinite;
+    -moz-animation:cloud_three 100s linear infinite;
+    -o-animation:cloud_three 100s linear infinite;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0)
+}
+
+@-webkit-keyframes sky_background {
+    0% {
+        background:#007fd5;
+        color:#007fd5
+    }
+
+    50% {
+        background:#000;
+        color:#a3d9ff
+    }
+
+    100% {
+        background:#007fd5;
+        color:#007fd5
+    }
+}
+
+@-webkit-keyframes moon {
+    0% {
+        opacity: 0;
+        left:-200%
+        -moz-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        -moz-transform: scale(1);
+        left:0%
+        bottom:250px;
+        -webkit-transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        bottom:500px;
+        -moz-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+}
+
+@-webkit-keyframes cloud_one {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+@-webkit-keyframes cloud_two {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+@-webkit-keyframes cloud_three {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+@-moz-keyframes sky_background {
+    0% {
+        background:#007fd5;
+        color:#007fd5
+    }
+
+    50% {
+        background:#000;
+        color:#a3d9ff
+    }
+
+    100% {
+        background:#007fd5;
+        color:#007fd5
+    }
+}
+
+@-moz-keyframes moon {
+    0% {
+        opacity: 0;
+        left:-200%
+        -moz-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        -moz-transform: scale(1);
+        left:0%
+        bottom:250px;
+        -webkit-transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        bottom:500px;
+        -moz-transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+}
+
+@-moz-keyframes cloud_one {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+@-moz-keyframes cloud_two {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+@-moz-keyframes cloud_three {
+    0% {
+        left:0
+    }
+
+    100% {
+        left:-200%
+    }
+}
+
+.title3d {
+  text-shadow: rgb(187, 187, 187) 0px 1px 0px,
+  rgb(181, 181, 181) 0px 2px 0px,
+  rgb(172, 172, 172) 0px 3px 0px,
+  rgb(160, 160, 160) 0px 4px 0px,
+  rgb(145, 145, 145) 0px 5px 0px,
+  rgb(127, 127, 127) 0px 6px 0px,
+  rgba(0, 0, 0, 0.199219) 0px 7px 1px,
+  rgba(0, 0, 0, 0.296875) 0px 8px 6px;
 }
