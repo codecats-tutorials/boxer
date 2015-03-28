@@ -8,7 +8,11 @@
  * Controller of the projApp
  */
 angular.module('projApp')
-  .controller('MainCtrl', function ($scope, $timeout) {
+  .controller('MainCtrl', function ($scope, $timeout, $http) {
+    $scope.data = [];
+    $http.get('/').success(function (data) {
+        $scope.data = data;
+    });
     function checkVisible (elm, evalu) {
         evalu = evalu || "visible";
         var vpH = angular.element(window).height(), // Viewport Height
@@ -21,10 +25,11 @@ angular.module('projApp')
         if (evalu == "past") return ((y + elementHeight < (vpH + st)));
     }
 
-    var secs = angular.element('[data=sec]'),
-        text = angular.element('[data=text]');
+
     //var sec2 = angular.element('#sec-2');
     angular.element(window).scroll(function() {
+        var secs = angular.element('[data=sec]'),
+            text = angular.element('[data=text]');
         secs.each(function (i) {
             var sec = angular.element(this);
             if (checkVisible(sec, 'past')) {
