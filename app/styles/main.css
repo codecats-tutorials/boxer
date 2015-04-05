@@ -151,22 +151,24 @@ html,body {
 
 
 .clouds_one {
-    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_one.png");
+    background:url("../images/1150ok.png");
     position:absolute;
+    margin-top:100px;
+    margin-bottom: 500px;
     left:0;
     top:0;
     height:100%;
     width:300%;
-    -webkit-animation:cloud_one 50s linear infinite;
-    -moz-animation:cloud_one 50s linear infinite;
-    -o-animation:cloud_one 50s linear infinite;
+    -webkit-animation:cloud_one 60s linear infinite;
+    -moz-animation:cloud_one 60s linear infinite;
+    -o-animation:cloud_one 60s linear infinite;
     -webkit-transform:translate3d(0,0,0);
     -moz-transform:translate3d(0,0,0);
     -o-transform:translate3d(0,0,0)
 }
 
 .clouds_two {
-    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_two.png");
+    background:url("../images/fog.png");
     position:absolute;
     left:0;
     top:0;
@@ -181,10 +183,10 @@ html,body {
 }
 
 .clouds_three {
-    background:url("http://montanaflynn.me/lab/css-clouds/images/cloud_three.png");
+    background:url("../images/fog.png");
     position:absolute;
-    left:0;
-    top:0;
+    left:100px;
+    top:100px;
     height:100%;
     width:300%;
     -webkit-animation:cloud_three 100s linear infinite;

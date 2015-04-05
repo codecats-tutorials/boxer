@@ -9,10 +9,12 @@
         <input class="form-control" ng-model="user.password" type="password" placeholder="hasło" />
     </div>
     <button class="btn btn-success glyphicon glyphicon-user" ng-click="login()"> Zaloguj</button>
-    <div ng-show="user.loginError">
-        <label class="text text-danger" ng-repeat="error in user.loginError" >
-            {$ error $}
-            <span ng-hide="$last">,&nbsp</span>
-        </label>
+    <div ng-show="user.errors" class="row">
+        <div ng-repeat="(key, errors) in user.errors" class="col-md-12">
+            <label class="label label-danger" >{$ key $}: </label>
+            <label class="text text-danger" ng-repeat="error in errors">
+                {$ error $}<span ng-hide="$last">,&nbsp</span>
+            </label>
+        </div>
     </div>
 </form>
