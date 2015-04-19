@@ -50,7 +50,7 @@ angular.module('projApp').controller('CoachesCtrl', function (
 
     $scope.editRow = function ($event, id) {
         if ( ! $scope.acl.resources.BOXERS) return;
-        if (angular.element($event.target).is('button,a,i')) return;
+        //if (angular.element($event.target).is('button,a,i')) return;
         $scope.template[id] = {
           coach: {
             name      : {url: 'views/coach/fields/name.html'},

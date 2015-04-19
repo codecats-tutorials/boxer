@@ -13,21 +13,23 @@ angular.module('projApp')
         list : {
             isArray             : true,
             method              : 'GET',
-            transformResponse   : function (data, headers) {
+            transformResponse   : function (dataRaw, headers) {
+                var data = JSON.parse(dataRaw);
                 for (var i in data.data) {
                     //if already voted show this vote as rate
-                    data.data[i]['rate'] = (data.data[i]['vote']) ? data.data[i]['vote'] : data.data[i]['rate'];
-                    data.data[i]['percent'] = 100 * ( data.data[i]['rate'] / Coach.RATE_MAX );
-                    for (var j in data.data[i]['players']) {
-                        if (typeof(data.data[i]['selectedPlayers']) === 'undefined') {
-                            data.data[i]['selectedPlayers'] = [];
-                        }
-                        //selectedPlayers for choice field
-                        data.data[i]['selectedPlayers'][j] = data.data[i]['players'][j].id
-                    }
+                    Coach._setRate(data.data[i]);
+                    Coach._selectPlayers(data.data[i]);
                 }
 
                 return data.data;
+            }
+        },
+        get: {
+            transformResponse   : function (dataRaw, headers) {
+                var data = JSON.parse(dataRaw);
+                Coach._setRate(data)
+                Coach._selectPlayers(data)
+                return data;
             }
         }
     });
@@ -43,6 +45,19 @@ angular.module('projApp')
         $http.get('/coaches?count=true').then(function (response) {
           cb(response.data.count);
         });
+    };
+    Coach._selectPlayers = function (data) {
+        for (var j in data['players']) {
+            if (typeof(data['selectedPlayers']) === 'undefined') {
+                data['selectedPlayers'] = [];
+            }
+            //selectedPlayers for choice field
+            data['selectedPlayers'][j] = data['players'][j].id
+        }
+    };
+    Coach._setRate = function (data) {
+        data['rate'] = (data['vote']) ? data['vote'] : data['rate'];
+        data['percent'] = 100 * ( data['rate'] / Coach.RATE_MAX );
     };
     Coach.RATE_MAX = 5;
 

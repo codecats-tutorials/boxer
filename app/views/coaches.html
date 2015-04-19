@@ -30,14 +30,19 @@
     <tbody>
         <tr
                 ng-mouseover="mouseOver($event)"
-                ng-repeat="coach in coaches track by $index" ng-click="editRow($event, $index)"
+                ng-repeat="coach in coaches track by $index"
+                ng-click="editRow($event, $index)"
                 ng-class="{
                     'animated slideInRight': ! template[$index].coach && $index % 2,
                     'animated slideInLeft': ! template[$index].coach && ! $index %2,
                     'animated flipInX': template[$index].coach
                 }"
         >
-            <th scope="row">{$ $index + 1 $}</th>
+            <th scope="row">
+                <button ng-click="editRow($event, $index)" class="btn btn-success">
+                    {$ $index + 1 $}. edytuj
+                </button>
+            </th>
             <td>{$ coach.id|limitTo:3 $}</td>
             <td>
                 <span ng-hide="template[$index].coach">{$ coach.name $}</span>
