@@ -123,6 +123,7 @@ angular.module('projApp').controller('CoachesCtrl', function (
     });
     $scope.hoveringOver = function (value, coach) {
       coach.overStar = value;
+      coach.rate = value;
       coach.percent = 100 * (value / $scope.max);
     };
     $scope.vote = function ($event, coach) {

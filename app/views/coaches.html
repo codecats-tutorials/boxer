@@ -39,7 +39,7 @@
                 }"
         >
             <th scope="row">
-                <button ng-click="editRow($event, $index)" class="btn btn-success">
+                <button ng-show="coach.id" ng-click="editRow($event, $index)" class="btn btn-success">
                     {$ $index + 1 $}. edytuj
                 </button>
             </th>

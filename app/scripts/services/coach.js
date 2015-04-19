@@ -31,6 +31,24 @@ angular.module('projApp')
                 Coach._selectPlayers(data)
                 return data;
             }
+        },
+        put: {
+            transformResponse   : function (dataRaw, headers) {
+                var data = JSON.parse(dataRaw);
+                Coach._setRate(data)
+                Coach._selectPlayers(data)
+                return data;
+            }
+
+        },
+        post: {
+            transformResponse   : function (dataRaw, headers) {
+                var data = JSON.parse(dataRaw);
+                Coach._setRate(data)
+                Coach._selectPlayers(data)
+                return data;
+            }
+
         }
     });
 
@@ -38,6 +56,7 @@ angular.module('projApp')
         'id'      : null,
         'name'    : null,
         'surname' : null,
+        'rate'    : null,
         'players' : [],
         'selectedPlayers': []
     });
