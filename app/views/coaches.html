@@ -4,7 +4,7 @@
         <col span="1" style="width: 5%;">
         <col span="1" style="width: 20%;">
         <col span="1" style="width: 20%;">
-        <col span="1" style="width: 20%;">
+        <col span="1" style="width: 25%;">
         <col span="1" style="width: 5%;">
         <col span="1" style="width: 15%;">
         <col span="1" style="width: 5%;">
@@ -39,7 +39,7 @@
                 }"
         >
             <th scope="row">
-                <button ng-show="coach.id" ng-click="editRow($event, $index)" class="btn btn-success">
+                <button ng-show="coach.id && acl.resources.BOXERS" ng-click="editRow($event, $index)" class="btn btn-success">
                     {$ $index + 1 $}. edytuj
                 </button>
             </th>
@@ -54,10 +54,11 @@
             </td>
             <td>
                 <span ng-hide="template[$index].coach">
-                    <span ng-repeat="player in coach.players">
-                        {$ player.name $} {$ player.surname $}
-                        <span ng-hide="$last">,&nbsp;</span>
-                    </span>
+                    <ul>
+                        <li ng-repeat="player in coach.players">
+                            {$ player.name $} {$ player.surname $}
+                        </li>
+                    </ul>
                 </span>
                 <span class="slide-animate" ng-include="template[$index].coach.players.url"></span>
             </td>
@@ -84,7 +85,7 @@
             </td>
             <td ng-show="template[$index].coach">
                 <div ng-show="acl.resources.BOXERS" class="btn-group-vertical" role="group" aria-label="Toolbar">
-                    <button ng-click="saveCoach($event, coach)" class="btn btn-xs btn-success">
+                    <button ng-click="saveCoach($event, coach, $index)" class="btn btn-xs btn-success">
                         Zapisz
                     </button>
                     <button ng-click="removeCoach($event, coach, $index)" class="btn btn-xs btn-danger"
@@ -103,7 +104,8 @@
                 <div class="text-center">
                     <pagination
                             ng-change="coachPaginator.pageChanged()"
-                            max-size="10"
+                            max-size="5"
+                            items-per-page="5"
                             boundary-links="true"
                             total-items="coachPaginator.totalItems"
                             ng-model="coachPaginator.currentPage"

@@ -17,8 +17,8 @@ angular.module('projApp')
                 var data = JSON.parse(dataRaw);
                 for (var i in data.data) {
                     //if already voted show this vote as rate
-                    Coach._setRate(data.data[i]);
-                    Coach._selectPlayers(data.data[i]);
+                    Coach.setRate(data.data[i]);
+                    Coach.selectPlayers(data.data[i]);
                 }
 
                 return data.data;
@@ -27,28 +27,10 @@ angular.module('projApp')
         get: {
             transformResponse   : function (dataRaw, headers) {
                 var data = JSON.parse(dataRaw);
-                Coach._setRate(data)
-                Coach._selectPlayers(data)
+                Coach.setRate(data)
+                Coach.selectPlayers(data)
                 return data;
             }
-        },
-        put: {
-            transformResponse   : function (dataRaw, headers) {
-                var data = JSON.parse(dataRaw);
-                Coach._setRate(data)
-                Coach._selectPlayers(data)
-                return data;
-            }
-
-        },
-        post: {
-            transformResponse   : function (dataRaw, headers) {
-                var data = JSON.parse(dataRaw);
-                Coach._setRate(data)
-                Coach._selectPlayers(data)
-                return data;
-            }
-
         }
     });
 
@@ -65,7 +47,7 @@ angular.module('projApp')
           cb(response.data.count);
         });
     };
-    Coach._selectPlayers = function (data) {
+    Coach.selectPlayers = function (data) {
         for (var j in data['players']) {
             if (typeof(data['selectedPlayers']) === 'undefined') {
                 data['selectedPlayers'] = [];
@@ -74,7 +56,7 @@ angular.module('projApp')
             data['selectedPlayers'][j] = data['players'][j].id
         }
     };
-    Coach._setRate = function (data) {
+    Coach.setRate = function (data) {
         data['rate'] = (data['vote']) ? data['vote'] : data['rate'];
         data['percent'] = 100 * ( data['rate'] / Coach.RATE_MAX );
     };

@@ -8,7 +8,7 @@
  * Controller of the projApp
  */
 angular.module('projApp').controller('CoachesCtrl', function (
-    $scope, $timeout, Coach, Players, $rootScope, $modal, $http
+    $scope, $timeout, Coach, Players, $rootScope, $modal, $http, $alert
   ) {
     var viewport  = angular.element('body'),
         coaches   = null;
@@ -83,11 +83,17 @@ angular.module('projApp').controller('CoachesCtrl', function (
         }
       }
     };
-    $scope.saveCoach = function ($event, coach) {
+    $scope.saveCoach = function ($event, coach, index) {
       viewport.addClass('loading');
       coach.$save(function () {
-        //todo: check if error
-        //$scope.editRowDismiss($event, index);
+        $scope.editRowDismiss($event, index);
+        Coach.setRate(coach);
+        Coach.selectPlayers(coach);
+        $alert({
+            title: 'Sukces!',
+            content: 'Zapisano.',
+            placement: 'top', type: 'info', show: true, duration: 5
+        });
         viewport.removeClass('loading');
       });
     };
