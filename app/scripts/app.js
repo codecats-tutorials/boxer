@@ -23,7 +23,7 @@ angular
     'ui.select2',
     //'ngMockE2E'//if u dont want mock requests anymore delete this module
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

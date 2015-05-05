@@ -83,6 +83,9 @@ angular.module('projApp')
             $scope.reloadPlayer();
         });
         $scope.reloadPlayer();
+
+
+
 //var myOtherModal = $modal({scope: $scope, template: 'views/forms/boxer-full-edit-modal.html', show: false});
 //    // Show when some event occurs (use $promise property to ensure the template has been loaded)
 //$scope.showModal = function() {
